@@ -571,17 +571,17 @@
                             numericValue = parseFloat(originalValue.replace('%', ''));
                             suffix = '%';
                         } else if (originalValue.includes('K')) {
-                            numericValue = parseFloat(originalValue.replace('K+', '')) * 1000; // Handle 'K+'
+                            numericValue = parseFloat(originalValue.replace('K+', '')) * 1000;
                             suffix = 'K+';
                         } else if (originalValue === '24/7') {
-                            target.textContent = '24/7'; // Directly set for 24/7
-                            return; // Exit function for this specific case
+                            target.textContent = '24/7'; 
+                            return; 
                         } else {
                             numericValue = parseInt(originalValue);
                         }
 
                         let current = 0;
-                        const duration = 1000; // milliseconds
+                        const duration = 1000;
                         const startTime = performance.now();
 
                         const animate = (currentTime) => {
@@ -602,10 +602,10 @@
                             }
                         };
                         requestAnimationFrame(animate);
-                        observer.unobserve(target); // Stop observing once animation starts
+                        observer.unobserve(target); 
                     }
                 });
-            }, { threshold: 0.5 }); // Trigger when 50% of element is visible
+            }, { threshold: 0.5 }); 
             
             statNumbers.forEach(stat => observer.observe(stat));
         }
