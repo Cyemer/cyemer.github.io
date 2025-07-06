@@ -567,25 +567,27 @@
                         const isK = finalValue.includes('K');
                         const isSlash = finalValue.includes('/');
                         
-                        let numericValue = parseFloat(finalValue.replace(/[^\d.]/g, ''));
-                        let current = 0;
-                        const increment = numericValue / 50;
-                        
-                        const timer = setInterval(() => {
+                        if (isSlash) {
+                            target.textContent = '24/7';
+                            } else {
+                            let numericValue = parseFloat(finalValue.replace(/[^\d.]/g, ''));
+                            let current = 0;
+                            const increment = numericValue / 50;
+    
+                            const timer = setInterval(() => {
                             current += increment;
-                            if (current >= numericValue) {
-                                current = numericValue;
-                                clearInterval(timer);
+                             if (current >= numericValue) {
+                                    current = numericValue;
+                                    clearInterval(timer);
                             }
-                            
-                            let displayValue = Math.floor(current);
+        
+                            let displayValue = isPercentage ? current.toFixed(1) : Math.floor(current);
                             if (isK) displayValue += 'K+';
-                            else if (isPercentage) displayValue += '%';
-                            else if (isSlash) displayValue = '24/7';
-                            else displayValue += '%';
-                            
+                             else if (isPercentage) displayValue += '%';
+        
                             target.textContent = displayValue;
                         }, 50);
+                    }
                     }
                 });
             });
