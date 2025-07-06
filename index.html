@@ -412,7 +412,7 @@
             <h1 class="hero-title">CYEMER</h1>
             <p class="hero-subtitle">The Ultimate Minecraft Client Experience</p>
             <div class="buttons">
-                <a href="#download" class="btn btn-primary">Download Now</a>
+                <a href="download/oops.txt" class="btn btn-primary" download>Download Now</a>
                 <a href="https://dsc.gg/cyemer" class="btn btn-secondary" target="_blank">Join Discord</a>
             </div>
         </div>
@@ -567,7 +567,7 @@
                         const isK = finalValue.includes('K');
                         const isSlash = finalValue.includes('/');
                         
-                        let numericValue = parseInt(finalValue.replace(/[^\d]/g, ''));
+                        let numericValue = parseFloat(finalValue.replace(/[^\d.]/g, ''));
                         let current = 0;
                         const increment = numericValue / 50;
                         
