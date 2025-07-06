@@ -562,35 +562,50 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const target = entry.target;
-                        const finalValue = target.textContent;
-                        const isPercentage = finalValue.includes('%');
-                        const isK = finalValue.includes('K');
-                        const isSlash = finalValue.includes('/');
+                        const originalValue = target.textContent;
                         
-                        if (isSlash) {
-                            target.textContent = '24/7';
+                        let numericValue;
+                        let suffix = '';
+
+                        if (originalValue.includes('%')) {
+                            numericValue = parseFloat(originalValue.replace('%', ''));
+                            suffix = '%';
+                        } else if (originalValue.includes('K')) {
+                            numericValue = parseFloat(originalValue.replace('K+', '')) * 1000; // Handle 'K+'
+                            suffix = 'K+';
+                        } else if (originalValue === '24/7') {
+                            target.textContent = '24/7'; // Directly set for 24/7
+                            return; // Exit function for this specific case
+                        } else {
+                            numericValue = parseInt(originalValue);
+                        }
+
+                        let current = 0;
+                        const duration = 1000; // milliseconds
+                        const startTime = performance.now();
+
+                        const animate = (currentTime) => {
+                            const elapsedTime = currentTime - startTime;
+                            const progress = Math.min(elapsedTime / duration, 1);
+                            
+                            let displayValue;
+                            if (suffix === '%') {
+                                displayValue = (numericValue * progress).toFixed(1);
                             } else {
-                            let numericValue = parseFloat(finalValue.replace(/[^\d.]/g, ''));
-                            let current = 0;
-                            const increment = numericValue / 50;
-    
-                            const timer = setInterval(() => {
-                            current += increment;
-                             if (current >= numericValue) {
-                                    current = numericValue;
-                                    clearInterval(timer);
+                                displayValue = Math.floor(numericValue * progress);
                             }
-        
-                            let displayValue = isPercentage ? current.toFixed(1) : Math.floor(current);
-                            if (isK) displayValue += 'K+';
-                             else if (isPercentage) displayValue += '%';
-        
-                            target.textContent = displayValue;
-                        }, 50);
-                    }
+
+                            target.textContent = displayValue + suffix;
+
+                            if (progress < 1) {
+                                requestAnimationFrame(animate);
+                            }
+                        };
+                        requestAnimationFrame(animate);
+                        observer.unobserve(target); // Stop observing once animation starts
                     }
                 });
-            });
+            }, { threshold: 0.5 }); // Trigger when 50% of element is visible
             
             statNumbers.forEach(stat => observer.observe(stat));
         }
