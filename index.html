@@ -423,7 +423,7 @@
             }
         }
 
-        /* Subtle animations */
+        /* Animations */
         .fade-up {
             opacity: 0;
             transform: translateY(30px);
@@ -433,6 +433,43 @@
         .fade-up.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease;
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scale-up {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.6s ease;
+        }
+
+        .scale-up.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .counter-animate {
+            font-variant-numeric: tabular-nums;
         }
 
         /* Code snippet styling */
@@ -491,15 +528,15 @@
                     </div>
                     <div class="hero-stats">
                         <div class="stat-item">
-                            <div class="stat-number">99.9%</div>
+                            <div class="stat-number" data-count="99.9">0</div>
                             <div class="stat-label">uptime</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-number">0ms</div>
+                            <div class="stat-number" data-count="0">0</div>
                             <div class="stat-label">added latency</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-number">24/7</div>
+                            <div class="stat-number" data-count="24">0</div>
                             <div class="stat-label">support</div>
                         </div>
                     </div>
@@ -515,37 +552,37 @@
 
     <section class="features" id="features">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header fade-up">
                 <h2 class="section-title">Why Cyemer?</h2>
                 <p class="section-description">We built this because existing clients either suck or cost way too much. Here's what makes us different.</p>
             </div>
             <div class="features-grid">
-                <div class="feature-card fade-up">
+                <div class="feature-card fade-up" style="animation-delay: 0.1s;">
                     <span class="feature-icon">⚡</span>
                     <h3 class="feature-title">Actually Fast</h3>
-                    <p class="feature-description">No FPS drops, no stuttering. We optimized the hell out of this thing so you can focus on winning.</p>
+                    <p class="feature-description">No FPS drops, no stuttering. We optimized the hell out of this thing so you can focus on playing.</p>
                 </div>
-                <div class="feature-card fade-up">
+                <div class="feature-card fade-up" style="animation-delay: 0.2s;">
                     <span class="feature-icon">🔒</span>
                     <h3 class="feature-title">Not Sketchy</h3>
-                    <p class="feature-description">Effective development, regular updates, and we're not trying to steal your account. Promise.</p>
+                    <p class="feature-description">Consistent development, regular updates, and we're not trying to steal your account. Promise.</p>
                 </div>
-                <div class="feature-card fade-up">
+                <div class="feature-card fade-up" style="animation-delay: 0.3s;">
                     <span class="feature-icon">🎨</span>
                     <h3 class="feature-title">Your Way</h3>
                     <p class="feature-description">Tons of customization options. Make it look and feel exactly how you want.</p>
                 </div>
-                <div class="feature-card fade-up">
+                <div class="feature-card fade-up" style="animation-delay: 0.4s;">
                     <span class="feature-icon">🔧</span>
                     <h3 class="feature-title">Just Works</h3>
                     <p class="feature-description">Drop it in your mods folder and you're done. No complicated setup, no weird launchers.</p>
                 </div>
-                <div class="feature-card fade-up">
+                <div class="feature-card fade-up" style="animation-delay: 0.5s;">
                     <span class="feature-icon">💬</span>
                     <h3 class="feature-title">Good Support</h3>
-                    <p class="feature-description">Real people who actually help when you need it. Just join our discord.</p>
+                    <p class="feature-description">Real people who actually help when you need it. Active on discord.</p>
                 </div>
-                <div class="feature-card fade-up">
+                <div class="feature-card fade-up" style="animation-delay: 0.6s;">
                     <span class="feature-icon">🚀</span>
                     <h3 class="feature-title">Always Improving</h3>
                     <p class="feature-description">Regular updates with new features and fixes. We listen to feedback and actually implement it.</p>
@@ -557,7 +594,7 @@
     <section class="info" id="download">
         <div class="container">
             <div class="info-grid">
-                <div class="info-content">
+                <div class="info-content slide-in-left">
                     <h2>Getting Started</h2>
                     <p>Installation is straightforward - just like any other Fabric mod. No weird installers, no suspicious executables.</p>
                     <ul class="info-list">
@@ -572,7 +609,7 @@
                     </div>
                     <a href="download/oops.txt" class="btn btn-primary" download>Download Cyemer</a>
                 </div>
-                <div class="info-visual">
+                <div class="info-visual slide-in-right">
                     <div style="position: absolute; top: 20px; left: 20px; right: 20px; bottom: 20px; background: rgba(0, 0, 0, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; color: var(--text-muted); text-align: center;">
                         <div>
                             <div style="margin-bottom: 16px;">📁 .minecraft/mods/</div>
@@ -614,6 +651,9 @@
     </footer>
 
     <script>
+        // Track which elements have already been animated
+        const animatedElements = new Set();
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -628,7 +668,7 @@
             });
         });
 
-        // Fade-up animation on scroll
+        // Enhanced animation observer
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -638,13 +678,62 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
+                    
+                    // Only animate numbers if they haven't been animated before
+                    if (entry.target.classList.contains('counter-animate') && !animatedElements.has(entry.target)) {
+                        animatedElements.add(entry.target);
+                        animateNumbers(entry.target);
+                    }
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('.fade-up').forEach(el => {
+        // Observe all animated elements except counter-animate (we'll handle that separately)
+        document.querySelectorAll('.fade-up, .slide-in-left, .slide-in-right, .scale-up').forEach(el => {
             observer.observe(el);
         });
+
+        // Number animation function
+        function animateNumbers(container) {
+            const numberElements = container.querySelectorAll('.stat-number[data-count]');
+            
+            numberElements.forEach(element => {
+                const target = parseFloat(element.getAttribute('data-count'));
+                const duration = 2000; // 2 seconds
+                const startTime = performance.now();
+                
+                // Determine suffix based on original content
+                let suffix = '';
+                if (target === 99.9) suffix = '%';
+                else if (target === 0) suffix = 'ms';
+                else if (target === 24) suffix = '/7';
+                
+                const animate = (currentTime) => {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    
+                    // Easing function for smooth animation
+                    const easeOut = 1 - Math.pow(1 - progress, 3);
+                    
+                    let currentValue;
+                    if (target === 99.9) {
+                        currentValue = (target * easeOut).toFixed(1);
+                    } else if (target === 0) {
+                        currentValue = Math.floor(target * easeOut);
+                    } else {
+                        currentValue = Math.floor(target * easeOut);
+                    }
+                    
+                    element.textContent = currentValue + suffix;
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(animate);
+                    }
+                };
+                
+                requestAnimationFrame(animate);
+            });
+        }
 
         // Header background on scroll
         window.addEventListener('scroll', () => {
@@ -654,6 +743,17 @@
             } else {
                 header.style.background = 'rgba(10, 10, 15, 0.9)';
             }
+        });
+
+        // Trigger hero stats animation on page load (only once)
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const heroStats = document.querySelector('.hero-stats');
+                if (heroStats && !animatedElements.has(heroStats)) {
+                    animatedElements.add(heroStats);
+                    animateNumbers(heroStats);
+                }
+            }, 1000); // Delay for better effect
         });
     </script>
 </body>
