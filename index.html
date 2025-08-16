@@ -242,10 +242,315 @@
             border: 1px solid rgba(0, 212, 255, 0.3);
         }
 
+        /* Purchase Section */
+        .purchase {
+            padding: 120px 0;
+            background: var(--bg-dark);
+            position: relative;
+        }
+
+        .slot-machine {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+
+        .purchase-option {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px 32px;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            min-height: 380px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .purchase-option.center {
+            transform: scale(1.1) translateZ(50px);
+            border-color: var(--primary);
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(0, 212, 255, 0.1) 100%);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+            z-index: 10;
+        }
+
+        .purchase-option.side {
+            opacity: 0.6;
+            transform: scale(0.9) rotateY(15deg);
+            filter: grayscale(0.5);
+        }
+
+        .purchase-option.side:hover {
+            opacity: 0.8;
+            transform: scale(0.95) rotateY(10deg);
+        }
+
+        .purchase-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .purchase-option.center .purchase-price {
+            color: var(--primary);
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .purchase-plan {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+
+        .purchase-description {
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .purchase-features {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .purchase-features li {
+            padding: 8px 0;
+            color: var(--text-muted);
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .purchase-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .purchase-btn {
+            width: 100%;
+            padding: 16px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--border);
+            background: transparent;
+            color: var(--text);
+        }
+
+        .purchase-option.center .purchase-btn {
+            background: var(--primary);
+            color: var(--bg-dark);
+            border-color: var(--primary);
+        }
+
+        .purchase-option.center .purchase-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .purchase-option.side .purchase-btn {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Tire Rolling Animation */
+        @keyframes tireRoll {
+            0% { 
+                transform: rotateY(-90deg) scale(0.8);
+                opacity: 0;
+            }
+            30% {
+                transform: rotateY(-30deg) scale(0.9);
+                opacity: 0.7;
+            }
+            60% {
+                transform: rotateY(15deg) scale(1.05);
+                opacity: 1;
+            }
+            100% { 
+                transform: rotateY(0deg) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes tireRollCenter {
+            0% { 
+                transform: rotateY(-90deg) scale(0.9);
+                opacity: 0;
+            }
+            30% {
+                transform: rotateY(-30deg) scale(1);
+                opacity: 0.7;
+            }
+            60% {
+                transform: rotateY(15deg) scale(1.15);
+                opacity: 1;
+            }
+            100% { 
+                transform: rotateY(0deg) scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes tireRollSide {
+            0% { 
+                transform: rotateY(-90deg) scale(0.7);
+                opacity: 0;
+            }
+            30% {
+                transform: rotateY(-45deg) scale(0.8);
+                opacity: 0.5;
+            }
+            60% {
+                transform: rotateY(-15deg) scale(0.95);
+                opacity: 0.8;
+            }
+            100% { 
+                transform: rotateY(0deg) scale(0.9);
+                opacity: 0.6;
+            }
+        }
+
+        .tire-animate {
+            animation: tireRoll 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .tire-animate.center {
+            animation: tireRollCenter 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .tire-animate.side {
+            animation: tireRollSide 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* Modules Section */
+        .modules {
+            padding: 120px 0;
+            background: var(--bg-darker);
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 60px;
+        }
+
+        .module-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            position: relative;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+        }
+
+        .module-card.click-in {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .module-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .module-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .module-icon {
+            font-size: 1.5rem;
+            padding: 8px;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .module-name {
+            font-weight: 600;
+            color: var(--text);
+            font-size: 1.1rem;
+        }
+
+        .module-status {
+            margin-left: auto;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            background: rgba(0, 212, 255, 0.2);
+            color: var(--primary);
+        }
+
+        .module-description {
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .module-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .module-tag {
+            padding: 4px 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        @keyframes clickIn {
+            0% {
+                transform: translateY(30px) scale(0.9);
+                opacity: 0;
+            }
+            60% {
+                transform: translateY(-5px) scale(1.02);
+            }
+            100% {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .module-card.animate-click {
+            animation: clickIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
         /* Features Section */
         .features {
             padding: 120px 0;
-            background: var(--bg-darker);
+            background: var(--bg-dark);
         }
 
         .section-header {
@@ -307,7 +612,7 @@
         /* Info Section */
         .info {
             padding: 120px 0;
-            background: var(--bg-dark);
+            background: var(--bg-darker);
         }
 
         .info-grid {
@@ -453,6 +758,20 @@
             .hero-stats {
                 justify-content: center;
             }
+
+            .slot-machine {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .purchase-option.side {
+                transform: scale(0.95) rotateX(0deg);
+                opacity: 0.7;
+            }
+
+            .purchase-option.center {
+                transform: scale(1) translateZ(0);
+            }
         }
 
         /* Animations */
@@ -532,6 +851,8 @@
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#features">Features</a></li>
+                <li><a href="#purchase">Purchase</a></li>
+                <li><a href="#modules">Modules</a></li>
                 <li><a href="#download">Download</a></li>
                 <li><a href="https://dsc.gg/cyemer" target="_blank">Discord</a></li>
             </ul>
@@ -583,6 +904,73 @@
                         // The player with the black skin is using Cyemer
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="purchase" id="purchase">
+        <div class="container">
+            <div class="section-header fade-up">
+                <h2 class="section-title">Choose Your Plan</h2>
+                <p class="section-description">We believe in keeping things simple. That's why our best features are free.</p>
+            </div>
+            <div class="slot-machine" id="slotMachine">
+                <div class="purchase-option side" data-plan="basic">
+                    <div>
+                        <div class="purchase-price">$9</div>
+                        <div class="purchase-plan">Basic</div>
+                        <div class="purchase-description">For casual players who want the essentials.</div>
+                        <ul class="purchase-features">
+                            <li>Basic optimizations</li>
+                            <li>Limited customization</li>
+                            <li>Community support</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="purchase-btn">Coming Soon</a>
+                </div>
+                
+                <div class="purchase-option center" data-plan="free">
+                    <div>
+                        <div class="purchase-price">FREE</div>
+                        <div class="purchase-plan">Core</div>
+                        <div class="purchase-description">Everything you need to dominate. No strings attached.</div>
+                        <ul class="purchase-features">
+                            <li>Full optimization suite</li>
+                            <li>Complete customization</li>
+                            <li>All ghost features</li>
+                            <li>24/7 Discord support</li>
+                            <li>Regular updates</li>
+                        </ul>
+                    </div>
+                    <a href="Cyemer.jar" class="purchase-btn" download>Download Now</a>
+                </div>
+                
+                <div class="purchase-option side" data-plan="pro">
+                    <div>
+                        <div class="purchase-price">$19</div>
+                        <div class="purchase-plan">Pro</div>
+                        <div class="purchase-description">Premium features for competitive players.</div>
+                        <ul class="purchase-features">
+                            <li>Everything in Core</li>
+                            <li>Advanced modules</li>
+                            <li>Premium support</li>
+                            <li>Beta access</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="purchase-btn">Coming Soon</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="modules" id="modules">
+        <div class="container">
+            <div class="section-header fade-up">
+                <h2 class="section-title">Powerful Modules</h2>
+                <p class="section-description">Each module is carefully crafted to give you an edge without compromising performance.</p>
+            </div>
+            <div class="modules-grid" id="modulesGrid">
+                <!-- Modules will be dynamically added here -->
             </div>
         </div>
     </section>
@@ -675,6 +1063,8 @@
                     <ul class="footer-links">
                         <li><a href="#home">Home</a></li>
                         <li><a href="#features">Features</a></li>
+                        <li><a href="#purchase">Purchase</a></li>
+                        <li><a href="#modules">Modules</a></li>
                         <li><a href="#download">Download</a></li>
                     </ul>
                 </div>
@@ -693,6 +1083,73 @@
     </footer>
 
     <script>
+        // Modules data
+        const modules = [
+            {
+                name: "TriggerBot",
+                icon: "⚔️",
+                status: "Active",
+                description: "Automatically attacks entities when you look at them.",
+                features: ["Smart timing", "Anti-detection", "Crit Prioritization"]
+            },
+            {
+                name: "AimAssist",
+                icon: "🔫",
+                status: "Active", 
+                description: "Automatically aims at players.",
+                features: ["Smart targetting", "Detects walls", "Smooth"]
+            },
+            {
+                name: "AutoAnchor",
+                icon: "💥",
+                status: "Active",
+                description: "Automatically explodes anchors.",
+                features: ["Input delay", "Swap to original item when done", "Hold totem"]
+            },
+            {
+                name: "AutoObsidian",
+                icon: "📏",
+                status: "Active",
+                description: "Automatically places obsidian for you.",
+                features: ["Easy hit-crystal", "Just works", "Never flags"]
+            },
+            {
+                name: "AutoCrystal",
+                icon: "🎯",
+                status: "Active",
+                description: "Quickly crystals.",
+                features: ["Fast", "Legitimate", "Powerful"]
+            },
+            {
+                name: "Nick",
+                icon: "🥸",
+                status: "Active",
+                description: "Stay hidden.",
+                features: ["Hide your name"]
+            },
+            {
+                name: "AutoShieldBreak",
+                icon: "🛡️",
+                status: "Active",
+                description: "Instantly disables opponents shield.",
+                features: ["Custom timings", "Timer above head"]
+            },
+            {
+                name: "HoverTotem",
+                icon: "💀",
+                status: "Active",
+                description: "Equips totems automatically.",
+                features: ["Legitimate timing", "Shuts inventory", "Bypass TotemGaurd"]
+            },
+            {
+                name: "ESP",
+                icon: "👁️",
+                status: "Active",
+                description: "Enhanced visual information about players and entities.",
+                features: ["Player ESP", "GlowESP", "Remove armor"]
+            }
+        ];
+
         // Track which elements have already been animated
         const animatedElements = new Set();
 
@@ -726,12 +1183,24 @@
                         animatedElements.add(entry.target);
                         animateNumbers(entry.target);
                     }
+
+                    // Handle purchase plans animation
+                    if (entry.target.id === 'slotMachine' && !animatedElements.has(entry.target)) {
+                        animatedElements.add(entry.target);
+                        setTimeout(() => animateTirePlans(), 500);
+                    }
+
+                    // Handle modules animation
+                    if (entry.target.id === 'modulesGrid' && !animatedElements.has(entry.target)) {
+                        animatedElements.add(entry.target);
+                        setTimeout(() => animateModules(), 300);
+                    }
                 }
             });
         }, observerOptions);
 
-        // Observe all animated elements except counter-animate (we'll handle that separately)
-        document.querySelectorAll('.fade-up, .slide-in-left, .slide-in-right, .scale-up').forEach(el => {
+        // Observe all animated elements
+        document.querySelectorAll('.fade-up, .slide-in-left, .slide-in-right, .scale-up, #slotMachine, #modulesGrid').forEach(el => {
             observer.observe(el);
         });
 
@@ -785,6 +1254,52 @@
             });
         }
 
+        // Tire rolling animation for purchase plans
+        function animateTirePlans() {
+            const options = document.querySelectorAll('.purchase-option');
+            
+            options.forEach((option, index) => {
+                setTimeout(() => {
+                    option.classList.add('tire-animate');
+                    setTimeout(() => {
+                        option.classList.remove('tire-animate');
+                    }, 1200);
+                }, index * 300); // Stagger the animations
+            });
+        }
+
+        // Generate and animate modules
+        function generateModules() {
+            const modulesGrid = document.getElementById('modulesGrid');
+            
+            modules.forEach((module, index) => {
+                const moduleCard = document.createElement('div');
+                moduleCard.className = 'module-card';
+                moduleCard.innerHTML = `
+                    <div class="module-header">
+                        <div class="module-icon">${module.icon}</div>
+                        <div class="module-name">${module.name}</div>
+                        <div class="module-status">${module.status}</div>
+                    </div>
+                    <div class="module-description">${module.description}</div>
+                    <div class="module-features">
+                        ${module.features.map(feature => `<span class="module-tag">${feature}</span>`).join('')}
+                    </div>
+                `;
+                modulesGrid.appendChild(moduleCard);
+            });
+        }
+
+        function animateModules() {
+            const moduleCards = document.querySelectorAll('.module-card');
+            
+            moduleCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('click-in', 'animate-click');
+                }, index * 150);
+            });
+        }
+
         // Header background on scroll
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
@@ -804,6 +1319,21 @@
                     animateNumbers(heroStats);
                 }
             }, 1000); // Delay for better effect
+        });
+
+        // Initialize modules on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            generateModules();
+        });
+
+        // Purchase option interactions (for future functionality)
+        document.querySelectorAll('.purchase-option').forEach(option => {
+            option.addEventListener('click', () => {
+                if (option.classList.contains('side')) {
+                    // Future: Handle side option clicks
+                    console.log('Coming soon feature clicked');
+                }
+            });
         });
     </script>
 </body>
