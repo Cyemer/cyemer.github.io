@@ -264,7 +264,7 @@
             border-bottom: 1px solid var(--border);
             background: rgba(0,0,0,0.3);
             padding: 40px 0;
-            margin-top: -80px; /* pull it up */
+            margin-top: 60px; /* spacing from hero */
             position: relative;
             z-index: 10;
         }
@@ -479,12 +479,12 @@
                 
                 <div class="btn-group">
                     <a href="https://github.com/Cyemer/cyemer.github.io/releases/download/test/install.zip" class="btn btn-primary" download>
-                        Download Client
+                        Download Client (free)
                         <!-- simple arrow svg -->
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
                     </a>
                     <a href="https://dsc.gg/cyemer" class="btn btn-secondary" target="_blank">
-                        Join Discord (if download isnt working join)
+                        Join Discord for support and configs
                     </a>
                 </div>
 
@@ -535,6 +535,26 @@
         </div>
     </section>
 
+
+    <!-- gui Showcase Section -->
+    <section id="gui" class="section" style="padding-top: 60px;">
+        <div class="section-header">
+            <h2>Clean Interface. Maximum Info.</h2>
+            <p>A GUI that doesn't get in your way, but shows you everything you need.</p>
+        </div>
+
+        <div style="max-width: 900px; margin: 0 auto; padding: 0 24px;">
+            <div class="gui-showcase">
+                <div class="glass-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/watch?v=LJvD5oTAp9k" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
     <section id="pricing" class="section">
         <div class="section-header">
             <h2>Pricing</h2>
@@ -559,7 +579,7 @@
             <div class="price-card featured">
                 <div class="pill" style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--accent); color: black;">RECOMMENDED</div>
                 <h3>Pro</h3>
-                <div class="price">$9<span>/month</span></div>
+                <div class="price">$?<span>/once</span></div>
                 <ul class="features-list">
                     <li class="active">All Core Modules</li>
                     <li class="active">Bypass Features</li>
@@ -572,7 +592,7 @@
             <!-- lifetime -->
             <div class="price-card">
                 <h3>Lifetime</h3>
-                <div class="price">$40<span>/once</span></div>
+                <div class="price">$?<span>/once</span></div>
                 <ul class="features-list">
                     <li class="active">Everything in Pro</li>
                     <li class="active">Beta Access</li>
@@ -592,15 +612,16 @@
     <script>
         // module data config
         const features = [
-            { icon: "⚔️", title: "TriggerBot", desc: "Auto-attack entities crosshair. Smart timing includes cooldown checks." },
-            { icon: "🎯", title: "AimAssist", desc: "Aims at enemies at a customizable rate." },
-            { icon: "💎", title: "AutoCrystal", desc: "Quickly D-tap opponents with ease." },
-            { icon: "🏥️", title: "AutoTotem", desc:"Easily equip totems" },
-            { icon: "📦", title: "ESP", desc: "See players, through walls. Highly customizable." },
-            { icon: "🚀", title: "Velocity", desc: "Jump reset with perfect timing." },
-            { icon: "👻", title: "Ghost Mode", desc: "Self-destruct the client for screenshares." },
+            { icon: "⚔️", title: "Fakelag", desc: "Dynamically lag to dodge enemies attacks. No paid client has made this module as powerful as ours (yet)." },
+            { icon: "😵", title: "AutoMace", desc: "Automatically hit INSANE mace shots like you're a HT1." },
+            { icon: "📖", title: "HudEditor", desc: "Manage beautiful HUD elements with ease, to get information your opponent would never have access to." },
+            { icon: "🏥️", title: "AutoTotem", desc:"Easily equip totems. Comes with smart inventory management (so blocks like stone arent in your hotbar - totems a=re)." },
+            { icon: "📱", title: "Android support", desc: "We support android as well as computers - if it crashes, we can apply patches and fixes quickly!" },
+            { icon: "👻", title: "SelfDestruct", desc: "Self-destruct the client for screenshares. It doesnt even show in your mods folder!" },
             { icon: "🔧", title: "Optimizer", desc: "Powerful optimization so you feel like you're playing normally." },
-            { icon: "💥", title: "AnchorAura", desc: "Explodes respawn anchors and protects you from the blast." }
+            { icon: "💥", title: "AnchorAura", desc: "Explodes respawn anchors and protects you from the blast. No free client has our 'block off' feature (yet)" },           
+{ icon: "📦", title: "And so much more", desc: "Theres to much to name here - download the client and see it for yourself!" }
+
         ];
 
         // logic to render cards
@@ -617,7 +638,6 @@
             container.appendChild(card);
         });
 
-        // navbar scroll effect
         // basically adds the blur when u scroll down
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
@@ -638,12 +658,6 @@
             });
         });
 
-        // little console message for curious devs
-        console.log(
-            "%c cyemer loaded %c\nready to dominate.", 
-            "color: #00f2ff; font-weight: bold; font-size: 20px;", 
-            "color: #94a3b8;"
-        );
     </script>
 </body>
 </html>
