@@ -437,6 +437,116 @@
             margin-top: 80px;
         }
 
+        /* version picker modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-sec);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            animation: modalSlideIn 0.3s var(--ease);
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .modal-header h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .modal-header p {
+            color: var(--text-sec);
+            font-size: 0.95rem;
+        }
+
+        .version-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .version-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s var(--ease);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .version-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .version-btn .version-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+        }
+
+        .version-btn .version-label {
+            font-size: 0.8rem;
+            color: var(--text-sec);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-sec);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .close-modal:hover {
+            color: white;
+        }
+
         @keyframes pulse {
             0% { opacity: 0.15; transform: translate(-50%, -50%) scale(1); }
             100% { opacity: 0.25; transform: translate(-50%, -50%) scale(1.1); }
@@ -473,12 +583,12 @@
         <div class="glow-orb"></div>
         <div class="hero-container">
             <div class="hero-text">
-                <div class="pill">FABRIC 1.21.1</div>
+                <div class="pill">FABRIC 1.21.1 -> 1.21.4</div>
                 <h1>Dominate.<br>Unfairly.</h1>
                 <p>Stop playing fair. Cyemer is the optimized, undetectable client designed for players who want to win, regardless of the cost.</p>
                 
                 <div class="btn-group">
-                    <a href="https://github.com/Cyemer/cyemer.github.io/releases/download/test/install.zip" class="btn btn-primary" download>
+                    <a href="#" class="btn btn-primary download-trigger">
                         Download Client (free)
                         <!-- simple arrow svg -->
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
@@ -555,7 +665,7 @@
                     <li>Config Cloud</li>
                     <li>Priority Support</li>
                 </ul>
-                <a href="https://github.com/Cyemer/cyemer.github.io/releases/download/test/install.zip" download class="btn btn-secondary" style="width: 100%; justify-content: center;">Download</a>
+                <a href="#" download class="btn btn-secondary download-trigger" style="width: 100%; justify-content: center;">Download</a>
             </div>
 
             <!-- pro plan -->
@@ -592,7 +702,83 @@
         </div>
     </footer>
 
+    <!-- version picker modal -->
+    <div class="modal-overlay" id="versionModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <h3>Select Your Version</h3>
+                <p>Choose your Minecraft version to download the compatible client</p>
+            </div>
+            <div class="version-grid">
+                <button class="version-btn" onclick="downloadVersion('1.21.1')">
+                    <span class="version-num">1.21.1</span>
+                    <span class="version-label">Fabric</span>
+                </button>
+                <button class="version-btn" onclick="downloadVersion('1.21.2')">
+                    <span class="version-num">1.21.2</span>
+                    <span class="version-label">Fabric</span>
+                </button>
+                <button class="version-btn" onclick="downloadVersion('1.21.3')">
+                    <span class="version-num">1.21.3</span>
+                    <span class="version-label">Fabric</span>
+                </button>
+                <button class="version-btn" onclick="downloadVersion('1.21.4')">
+                    <span class="version-num">1.21.4</span>
+                    <span class="version-label">Fabric</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // version download URLs
+        const versionUrls = {
+            '1.21.1': 'downloads/cyemer-1.21.1.jar',
+            '1.21.2': 'downloads/cyemer-1.21.2.jar',
+            '1.21.3': 'downloads/cyemer-1.21.3.jar',
+            '1.21.4': 'downloads/cyemer-1.21.4.jar'
+        };
+
+        // open 
+        function openModal() {
+            document.getElementById('versionModal').classList.add('active');
+        }
+
+        // close 
+        function closeModal() {
+            document.getElementById('versionModal').classList.remove('active');
+        }
+
+        // download specific version
+        function downloadVersion(version) {
+            const url = versionUrls[version];
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `cyemer-${version}.jar`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            closeModal();
+        }
+
+        // close when clicking outside
+        document.getElementById('versionModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // attach to all download buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.download-trigger').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openModal();
+                });
+            });
+        });
+
         // module data config
         const features = [
             { icon: "⚔️", title: "Fakelag", desc: "Dynamically lag to dodge enemies attacks. No paid client has made this module as powerful as ours (yet)." },
@@ -603,8 +789,7 @@
             { icon: "👻", title: "SelfDestruct", desc: "Self-destruct the client for screenshares. It doesnt even show in your mods folder!" },
             { icon: "🔧", title: "Optimizer", desc: "Powerful optimization so you feel like you're playing normally." },
             { icon: "💥", title: "AnchorAura", desc: "Explodes respawn anchors and protects you from the blast. No free client has our 'block off' feature (yet)" },           
-{ icon: "📦", title: "And so much more", desc: "Theres to much to name here - download the client and see it for yourself!" }
-
+            { icon: "📦", title: "And so much more", desc: "Theres to much to name here - download the client and see it for yourself!" }
         ];
 
         // logic to render cards
@@ -635,9 +820,12 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = this.getAttribute('href');
+                if (target !== '#') {
+                    document.querySelector(target).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
 
