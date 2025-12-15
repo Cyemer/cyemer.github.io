@@ -5,14 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cyemer | Dominate Unfairly</title>
     
-    <!-- fonties -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
-        /* 
-           setup vars 
+        /* setup vars 
         */
         :root {
             --accent: #00f2ff;
@@ -53,8 +51,7 @@
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #555; }
 
-        /* 
-           navigation 
+        /* navigation 
            glass effect headers are smexy
         */
         nav {
@@ -112,8 +109,7 @@
 
         .links a:hover { color: white; }
 
-        /* 
-           hero section 
+        /* hero section 
            big text, nice glow
         */
         .hero {
@@ -198,6 +194,10 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            cursor: pointer;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
         }
 
         .btn-primary {
@@ -255,8 +255,7 @@
             height: 100%;
         }
 
-        /* 
-           stats section
+        /* stats section
            simple grid
         */
         .stats-strip {
@@ -292,8 +291,7 @@
             letter-spacing: 0.05em;
         }
 
-        /* 
-           modules section 
+        /* modules section 
         */
         .section {
             padding: 120px 0;
@@ -359,9 +357,152 @@
             line-height: 1.5;
         }
 
-        /* 
-           pricing
-           made this look cleaner, less chaotic
+        /* REVIEW SYSTEM STYLES (New Addition)
+        */
+        .reviews-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+        }
+
+        .review-carousel {
+            overflow: hidden;
+            margin: 0 -12px; /* Offset gap */
+            padding: 10px 0; /* Space for hover effects */
+        }
+
+        .review-track {
+            display: flex;
+            transition: transform 0.5s var(--ease);
+        }
+
+        .review-card {
+            flex: 0 0 33.333%; /* Show 3 at a time */
+            max-width: 33.333%;
+            padding: 0 12px; /* Gutter */
+            display: flex;
+        }
+
+        .review-inner {
+            background: var(--bg-sec);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s var(--ease);
+            width: 100%;
+        }
+
+        .review-inner:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(0, 242, 255, 0.1);
+        }
+
+        .review-content {
+            margin-bottom: 24px;
+        }
+
+        .review-stars {
+            color: var(--accent);
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+
+        .review-text {
+            color: var(--text-sec);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .review-text::before {
+            content: '"';
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-right: 4px;
+        }
+
+        .review-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--bg-main), #1e293b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .author-info h4 {
+            color: white;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .verified-badge {
+            font-size: 0.75rem;
+            color: var(--accent);
+            background: var(--accent-dim);
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 8px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .carousel-nav {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 32px;
+            padding-right: 24px;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s var(--ease);
+        }
+
+        .nav-btn:hover {
+            border-color: var(--accent);
+            background: var(--accent-dim);
+            color: var(--accent);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            border-color: var(--border);
+            background: transparent;
+            color: white;
+        }
+
+        /* pricing
         */
         .pricing-grid {
             max-width: 1000px;
@@ -557,8 +698,11 @@
             .hero-container, .pricing-grid { grid-template-columns: 1fr; text-align: center; }
             .hero-text h1 { font-size: 3rem; }
             .hero-visual { display: none; }
-            .links { display: none; } /* hide nav links on mobile for simplicity */
+            .links { display: none; }
             .price-card.featured { transform: scale(1); }
+            
+            /* review mobile styles */
+            .review-card { flex: 0 0 100%; max-width: 100%; }
         }
     </style>
 </head>
@@ -572,13 +716,13 @@
             <ul class="links">
                 <li><a href="#features">Features</a></li>
                 <li><a href="#modules">Modules</a></li>
+                <li><a href="#reviews">Reviews</a></li>
                 <li><a href="#pricing">Pricing</a></li>
                 <li><a href="https://dsc.gg/cyemer" target="_blank">Discord</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- hero section -->
     <section class="hero">
         <div class="glow-orb"></div>
         <div class="hero-container">
@@ -590,7 +734,6 @@
                 <div class="btn-group">
                     <a href="#" class="btn btn-primary download-trigger">
                         Download Client (free)
-                        <!-- simple arrow svg -->
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
                     </a>
                     <a href="https://dsc.gg/cyemer" class="btn btn-secondary" target="_blank">
@@ -616,7 +759,6 @@
         </div>
     </section>
 
-    <!-- quick stats strip -->
     <div class="stats-strip">
         <div class="stats-grid">
             <div class="stat-item">
@@ -641,12 +783,31 @@
         </div>
 
         <div class="module-grid" id="moduleContainer">
-            <!-- injecting these via js to keep html clean -->
-        </div>
+            </div>
     </section>
 
+    <section id="reviews" class="section" style="background: rgba(0,0,0,0.2);">
+        <div class="section-header">
+            <h2>Community Feedback</h2>
+            <p>Don't take our word for it. See what top players are saying.</p>
+        </div>
 
+        <div class="reviews-wrapper">
+            <div class="review-carousel">
+                <div class="review-track" id="reviewTrack">
+                    </div>
+            </div>
 
+            <div class="carousel-nav">
+                <button class="nav-btn" id="prevBtn" onclick="moveCarousel(-1)">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <button class="nav-btn" id="nextBtn" onclick="moveCarousel(1)">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+            </div>
+        </div>
+    </section>
 
     <section id="pricing" class="section">
         <div class="section-header">
@@ -655,7 +816,6 @@
         </div>
 
         <div class="pricing-grid">
-            <!-- basic plan -->
             <div class="price-card">
                 <h3>Basic</h3>
                 <div class="price">$0<span>/forever</span></div>
@@ -668,7 +828,6 @@
                 <a href="#" download class="btn btn-secondary download-trigger" style="width: 100%; justify-content: center;">Download</a>
             </div>
 
-            <!-- pro plan -->
             <div class="price-card featured">
                 <div class="pill" style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--accent); color: black;">RECOMMENDED</div>
                 <h3>Pro</h3>
@@ -682,7 +841,6 @@
                 <button class="btn btn-primary" style="width: 100%; justify-content: center;">Coming Soon</button>
             </div>
 
-            <!-- lifetime -->
             <div class="price-card">
                 <h3>Lifetime</h3>
                 <div class="price">$?<span>/once</span></div>
@@ -702,7 +860,6 @@
         </div>
     </footer>
 
-    <!-- version picker modal -->
     <div class="modal-overlay" id="versionModal">
         <div class="modal-content">
             <button class="close-modal" onclick="closeModal()">&times;</button>
@@ -784,11 +941,11 @@
             { icon: "⚔️", title: "Fakelag", desc: "Dynamically lag to dodge enemies attacks. No paid client has made this module as powerful as ours (yet)." },
             { icon: "😵", title: "AutoMace", desc: "Automatically hit INSANE mace shots like you're a HT1." },
             { icon: "📖", title: "HudEditor", desc: "Manage beautiful HUD elements with ease, to get information your opponent would never have access to." },
-            { icon: "🏥️", title: "AutoTotem", desc:"Easily equip totems. Comes with smart inventory management (so blocks like stone arent in your hotbar - totems a=re)." },
+            { icon: "🏥️", title: "AutoTotem", desc:"Easily equip totems. Comes with smart inventory management (so blocks like stone arent in your hotbar - totems are)." },
             { icon: "📱", title: "Android support", desc: "We support android as well as computers - if it crashes, we can apply patches and fixes quickly!" },
             { icon: "👻", title: "SelfDestruct", desc: "Self-destruct the client for screenshares. It doesnt even show in your mods folder!" },
             { icon: "🔧", title: "Optimizer", desc: "Powerful optimization so you feel like you're playing normally." },
-            { icon: "💥", title: "AnchorAura", desc: "Explodes respawn anchors and protects you from the blast. No free client has our 'block off' feature (yet)" },           
+            { icon: "💥", title: "AnchorAura", desc: "Explodes respawn anchors and protects you from the blast. No free client has our 'block off' feature (yet)" },            
             { icon: "📦", title: "And so much more", desc: "Theres to much to name here - download the client and see it for yourself!" }
         ];
 
@@ -827,6 +984,102 @@
                     });
                 }
             });
+        });
+
+        /*
+           config for carousel 
+           ldkiasdfnds
+        */
+        const reviewsConfig = [
+            {
+                user: "Vikas_999",
+                text: "I just tried out StunSlam, and it’s incredible. Honestly, I’d say it’s even better than most paid clients’ StunSlams. It’s super consistent, doesn’t flag, and looks totally legit from the other person’s perspective. The only downside right now is version support, but once Lime updates that, this client will be pretty much flawless. Huge W for Cyemer.",
+                rating: 5
+            },
+            {
+                user: "Sir Jonathen the 19th",
+                text: "W client used for a solid month, never been banned, flagged or even suspected of cheating. over 2000 wins on a server, and under 200 losses since I started using. Went from 100 wins | 200 losses to 2000 wins | 350 losses, updates always work as expected. overall if I compare this to paid clients, I would rate it 7/10, compared to other free clients EASY 10/10, absolutely obliterates ALL of them in features, bypassing, and visuals.",
+                rating: 5
+            },
+            {
+                user: "Barely Awake",
+                text: "+rep this client is like a new WM (window manager for all you non-linux users) hard to get used to but soo good when u get used to it",
+                rating: 5
+            },
+            {
+                user: "qhxst",
+                text: "this client goes hard. straight up one of the cleanest Ive touched no bs, just raw features that actually work. respect to the devs for keeping it real and not pumping out some mid garbage like half these other clients. solid work ngl",
+                rating: 5
+            },
+            {
+                user: "material",
+                text: "10/10 client and staff team is very kind",
+                rating: 5
+            }
+        ];
+
+        let currentIndex = 0;
+        const track = document.getElementById('reviewTrack');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        // generate avatar initials (maybe just use their actual avatar)
+        function getInitials(name) {
+            return name.substring(0, 2).toUpperCase();
+        }
+
+        // show reviews
+        function initReviews() {
+            reviewsConfig.forEach(review => {
+                const card = document.createElement('div');
+                card.className = 'review-card';
+                card.innerHTML = `
+                    <div class="review-inner">
+                        <div class="review-content">
+                            <div class="review-stars">★★★★★</div>
+                            <div class="review-text">${review.text}</div>
+                        </div>
+                        <div class="review-author">
+                            <div class="author-avatar">${getInitials(review.user)}</div>
+                            <div class="author-info">
+                                <h4>${review.user}</h4>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                track.appendChild(card);
+            });
+            updateButtons();
+        }
+
+        function moveCarousel(direction) {
+            const cardWidth = 100 / (window.innerWidth <= 768 ? 1 : 3); // 1 card on mobile, 3 on desktop
+            const maxIndex = reviewsConfig.length - (window.innerWidth <= 768 ? 1 : 3);
+
+            currentIndex += direction;
+
+            // clamp index
+            if (currentIndex < 0) currentIndex = 0;
+            if (currentIndex > maxIndex) currentIndex = maxIndex;
+
+            const translateX = -(currentIndex * cardWidth);
+            track.style.transform = `translateX(${translateX}%)`;
+            
+            updateButtons();
+        }
+
+        function updateButtons() {
+            const maxIndex = reviewsConfig.length - (window.innerWidth <= 768 ? 1 : 3);
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex >= maxIndex;
+        }
+
+        initReviews();
+
+        window.addEventListener('resize', () => {
+            currentIndex = 0; // reset to start on resize to prevent bugs
+            track.style.transform = `translateX(0%)`;
+            updateButtons();
         });
 
     </script>
