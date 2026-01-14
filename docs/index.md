@@ -1,6 +1,6 @@
 # Welcome to the Cyemer Docs
 
-Here is some info for the client.
+This is essentially a guide on every Cyemer module and the Scripting API. 
 
 !!! note "Fun Fact"
     Whilst Cyemer was made by 3 people, these docs are maintained by members as well as moderators.
