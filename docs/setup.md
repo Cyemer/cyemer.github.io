@@ -9,3 +9,6 @@ After launching your game, you may notice that the GUI does not scale on the scr
 Example of GUI appearing too big:
 ![biggui](images/biggui.png)
 
+
+Example of GUI after shrinking:
+![correctgui](images/correctgui.png)
