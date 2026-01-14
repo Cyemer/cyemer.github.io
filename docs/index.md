@@ -10,3 +10,5 @@ Here is some info for the client.
 
 ??? tip "Click to see a secret tip"
     Secret shenanigans.
+
+Whilst Cyemer was made by 3 people, these docs are maintained by members as well as moderators. 
