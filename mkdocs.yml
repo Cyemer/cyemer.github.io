@@ -35,6 +35,7 @@ markdown_extensions:
   - pymdownx.highlight
   - pymdownx.inlinehilite
   - pymdownx.snippets
+  - attr_list
 
 extra:
   external_links:
