@@ -10,7 +10,7 @@ The module comes with a variety of settings to fine-tune how "blatant" or "legit
 *   **Ignore Friends**: Prevents the bot from attacking players added to your Friend Manager.
 *   **Ignore Shields**: If the target is blocking with a shield, the bot will stop attacking to prevent wasting durability/cooldown.
 *   **Only on LMB**: The bot will only active while you are holding down your attack key (Left Mouse Button).
-    *   *Recommended for legit play to prevent accidentally hitting mobs while walking around.*
+    *   *Recommended for legit play to prevent accidentally hitting players while walking around.*
 
 ## Timing & Logic
 *   **Crit Prio**: Smart critical hit logic. The bot waits until you can crit if you are falling.
