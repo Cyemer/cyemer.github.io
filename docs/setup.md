@@ -7,4 +7,5 @@ Setting up Cyemer is incredibly easy, simply go [here](https://cyemer.github.io)
 After launching your game, you may notice that the GUI does not scale on the screen correctly (some panels tabs may be cut off). To fix this, simply hold the control key and scroll out. You can also scroll back in. If the GUI is too far to one side, press in your middle mouse button and drag it around to move it.
 
 Example of GUI appearing too big:
-![biggui](images/guigui.png)
+![biggui](images/biggui.png)
+
