@@ -27,3 +27,12 @@ nav:
     - AimAssist: aimassist.md
   - Scripting API: 
     - doesntExist: thisdoesntexistyet.md
+    
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+
