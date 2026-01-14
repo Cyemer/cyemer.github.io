@@ -19,3 +19,11 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
+nav:
+  - Home: index.md
+  - Setup Guide: setup.md
+  - Modules: 
+    - TriggerBot: triggerbot.md
+    - AimAssist: aimassist.md
+  - Scripting API: 
+    - doesntExist: thisdoesntexistyet.md
