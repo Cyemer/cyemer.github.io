@@ -71,6 +71,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#triggerbot" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -334,6 +339,26 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TriggerBot
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -351,6 +376,86 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#features-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Features &amp; Settings
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#targeting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        targeting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#timing-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Timing &amp; Logic
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Timing &amp; Logic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#item-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Item Filtering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#humanization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Humanization
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -491,6 +596,77 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#features-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Features &amp; Settings
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#targeting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        targeting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#timing-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Timing &amp; Logic
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Timing &amp; Logic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#item-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Item Filtering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#humanization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Humanization
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -507,9 +683,46 @@
 
 
 
-  <h1>TriggerBot</h1>
-
-
+<h1 id="triggerbot">TriggerBot</h1>
+<p>TriggerBot is a generic combat module that automatically attacks entities when your crosshair is aimed at them. This means it should be paired with <a href="https://cyemer.github.io/docs_site/modules/aimassist.md"><strong>AimAssist</strong></a>, or if the user is skilled enough they can aim manually.</p>
+<h2 id="features-settings">Features &amp; Settings</h2>
+<p>The module comes with a variety of settings to fine-tune how "blatant" or "legit" you want the attacks to be.</p>
+<h2 id="targeting">targeting</h2>
+<ul>
+<li><strong>Ignore Friends</strong>: Prevents the bot from attacking players added to your Friend Manager.</li>
+<li><strong>Ignore Shields</strong>: If the target is blocking with a shield, the bot will stop attacking to prevent wasting durability/cooldown.</li>
+<li><strong>Only on LMB</strong>: The bot will only active while you are holding down your attack key (Left Mouse Button).<ul>
+<li><em>Recommended for legit play to prevent accidentally hitting mobs while walking around.</em></li>
+</ul>
+</li>
+</ul>
+<h2 id="timing-logic">Timing &amp; Logic</h2>
+<ul>
+<li><strong>Crit Prio</strong>: Smart critical hit logic. The bot waits until you can crit if you are falling.<ul>
+<li><em>Note: This automatically disables itself if you are in webs, water, or climbing ladders.</em></li>
+</ul>
+</li>
+<li><strong>Cooldown %</strong>: Determines how fully charged your attack indicator must be before swinging. 100% is standard 1.9+ combat, however, 90% is superior as you can still crit, but it is faster than waiting for 100%. </li>
+<li><strong>TPS Sync</strong>: Syncs attacks to the server tick rather than the client framerate. This helps register hits more consistently on laggy servers. Hits may appear to be slighly delayed (not very noticable in a fight).</li>
+</ul>
+<h3 id="item-filtering">Item Filtering</h3>
+<ul>
+<li><strong>Only Weapons</strong>: Ensures you only attack when holding a weapon (Sword, Axe, Trident, Mace).</li>
+<li><strong>Slot Restriction</strong>: Forces the bot to only work if you have a specific hotbar slot selected (1-9).</li>
+</ul>
+<h3 id="humanization">Humanization</h3>
+<ul>
+<li><strong>Randomization</strong>: Enables a random delay offset for attacks.</li>
+<li><strong>Random Delay (ms)</strong>: The maximum amount of time (in milliseconds) to delay the attack.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Legit Configuration</p>
+<p>If you are playing on a server with a powerful heuristic anticheat (like Polar), you want to have delay time on so it is harder to detect.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Shield Logic</p>
+<p>If <strong>Ignore Shields</strong> is enabled, it will appear very blatant as you automatically hit as they lower their shield, which normal players do not do.</p>
+</div>
 
 
 
