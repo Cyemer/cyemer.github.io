@@ -23,8 +23,8 @@ nav:
   - Home: index.md
   - Setup Guide: setup.md
   - Modules: 
-    - TriggerBot: triggerbot.md
-    - AimAssist: aimassist.md
+    - TriggerBot: modules/triggerbot.md
+    - AimAssist: modules/aimassist.md
   - Scripting API: 
     - doesntExist: thisdoesntexistyet.md
     
