@@ -37,7 +37,3 @@ markdown_extensions:
   - pymdownx.snippets
   - attr_list
 
-extra:
-  external_links:
-    target: _blank
-
