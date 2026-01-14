@@ -36,3 +36,7 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
 
+extra:
+  external_links:
+    target: _blank
+
