@@ -6,9 +6,9 @@ Here is some info for the client.
     This is a fun fact box! It has cool info about the client.
 
 !!! warning "Important"
-    Important thinks to remember.
+    Important things to remember.
 
 ??? tip "Click to see a secret tip"
     Secret shenanigans.
 
-Whilst Cyemer was made by 3 people, these docs are maintained by members as well as moderators. 
+Whilst Cyemer was made by 3 people, these docs are maintained by members as well as moderators.
