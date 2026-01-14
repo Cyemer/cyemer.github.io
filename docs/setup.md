@@ -1,5 +1,5 @@
 # Setting up Cyemer
-Setting up Cyemer is incredibly easy, simply go [here](https://cyemer.github.io) and press download, then select your version. From there, drag the downloaded file into your mods folder. Remember to install the [Fabric API](https://modrinth.com/mod/fabric-api) for that version. 
+Setting up Cyemer is incredibly easy, simply go [here](https://cyemer.github.io){:target="_blank"} and press download, then select your version. From there, drag the downloaded file into your mods folder. Remember to install the [Fabric API](https://modrinth.com/mod/fabric-api){:target="_blank"} for that version. 
 
 !!! warning "Important"
     If you have the "Dynamic FPS" mod installed, Cyemer will **NOT** work. This is because it disguises itself as Dynamic FPS to hide in screenshares. This is the most common reason that Cyemer will not work. 
