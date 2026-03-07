@@ -4,1084 +4,643 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cyemer | Dominate Unfairly</title>
-    
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['JetBrains Mono', 'monospace'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        cyan: { DEFAULT: '#00f2ff', dim: 'rgba(0,242,255,0.1)', glow: 'rgba(0,242,255,0.35)' },
+                        bg: { main: '#050507', sec: '#0a0a0f' },
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        /* setup vars 
-        */
         :root {
             --accent: #00f2ff;
             --accent-dim: rgba(0, 242, 255, 0.1);
             --accent-glow: rgba(0, 242, 255, 0.4);
-            
-            --bg-main: #050507;
-            --bg-sec: #0a0a0f;
-            --glass: rgba(20, 20, 25, 0.6);
-            --border: rgba(255, 255, 255, 0.08);
-            
-            --text-main: #ffffff;
-            --text-sec: #94a3b8;
-            
-            --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+            --bg: #050507;
+            --bg2: #0a0a0f;
+            --border: rgba(255,255,255,0.08);
+            --muted: #64748b;
         }
 
-        /* reset stuff */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-font-smoothing: antialiased;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
 
         body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
+            background: var(--bg);
+            color: #fff;
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
-            /* subtle noise texture makes it look less flat */
-            background-image: radial-gradient(circle at 50% 0%, #1a1a2e 0%, transparent 70%);
+            background-image: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0,242,255,0.07), transparent);
         }
 
-        /* scrollbar customization */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-main); }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #555; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: #222; border-radius: 3px; }
 
-        /* navigation 
-           glass effect headers are smexy
-        */
+        .font-display { font-family: 'JetBrains Mono', monospace; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 20px 0;
             z-index: 100;
-            transition: all 0.3s var(--ease);
+            padding: 20px 0;
+            transition: all 0.3s ease;
             border-bottom: 1px solid transparent;
         }
-
         nav.scrolled {
-            background: rgba(5, 5, 7, 0.8);
-            backdrop-filter: blur(12px);
+            background: rgba(5,5,7,0.85);
+            backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border);
-            padding: 15px 0;
+            padding: 14px 0;
         }
 
-        .nav-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 24px;
-        }
-
-        .logo {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo span { color: var(--accent); }
-
-        .links {
-            display: flex;
-            gap: 32px;
-            list-style: none;
-        }
-
-        .links a {
-            color: var(--text-sec);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .links a:hover { color: white; }
-
-        /* hero section 
-           big text, nice glow
-        */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            padding-top: 80px;
-        }
-
-        /* bg glow orb */
         .glow-orb {
             position: absolute;
-            width: 600px;
-            height: 600px;
+            width: 700px;
+            height: 700px;
             background: var(--accent);
-            filter: blur(150px);
-            opacity: 0.15;
+            filter: blur(180px);
+            opacity: 0.1;
             border-radius: 50%;
-            z-index: -1;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: pulse 8s infinite alternate;
+            pointer-events: none;
+            animation: pulse 9s infinite alternate;
         }
 
-        .hero-container {
-            max-width: 1200px;
-            width: 100%;
-            padding: 0 24px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
+        @keyframes pulse {
+            from { opacity: 0.08; transform: translate(-50%, -50%) scale(1); }
+            to   { opacity: 0.18; transform: translate(-50%, -50%) scale(1.12); }
         }
 
-        .hero-text h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 4.5rem;
-            line-height: 1;
-            margin-bottom: 24px;
-            letter-spacing: -0.03em;
-            background: linear-gradient(to right, #fff, #a5b4fc);
+        .gradient-text {
+            background: linear-gradient(135deg, #fff 30%, #7dd3fc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-
-        .hero-text p {
-            color: var(--text-sec);
-            font-size: 1.2rem;
-            margin-bottom: 32px;
-            max-width: 480px;
-            line-height: 1.6;
+            background-clip: text;
         }
 
         .pill {
             display: inline-flex;
             align-items: center;
-            padding: 6px 12px;
+            gap: 6px;
+            padding: 5px 12px;
             background: var(--accent-dim);
-            border: 1px solid rgba(0, 242, 255, 0.2);
+            border: 1px solid rgba(0,242,255,0.25);
             border-radius: 100px;
             color: var(--accent);
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 600;
-            margin-bottom: 24px;
             font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 0.03em;
         }
 
-        .btn-group {
-            display: flex;
-            gap: 16px;
+        .pill-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
         }
 
         .btn {
-            padding: 14px 28px;
-            border-radius: 12px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s var(--ease);
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            padding: 13px 26px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
             cursor: pointer;
+            text-decoration: none;
             border: none;
             font-family: 'Inter', sans-serif;
-            font-size: 1rem;
         }
 
-        .btn-primary {
-            background: white;
-            color: black;
-        }
+        .btn-primary { background: #fff; color: #000; }
+        .btn-primary:hover { background: var(--accent); box-shadow: 0 0 24px var(--accent-glow); transform: translateY(-2px); }
 
-        .btn-primary:hover {
-            background: var(--accent);
-            box-shadow: 0 0 20px var(--accent-glow);
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
+        .btn-ghost {
             background: rgba(255,255,255,0.05);
-            color: white;
+            color: #fff;
             border: 1px solid var(--border);
         }
-
-        .btn-secondary:hover {
-            border-color: white;
-            background: rgba(255,255,255,0.1);
-        }
-
-        /* 3d tilt card for the visual */
-        .hero-visual {
-            perspective: 1000px;
-        }
+        .btn-ghost:hover { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.08); }
 
         .glass-card {
-            background: var(--glass);
+            background: rgba(14,14,20,0.7);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 20px;
-            transform-style: preserve-3d;
-            transform: rotateY(-5deg) rotateX(5deg);
-            transition: transform 0.5s var(--ease);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border-radius: 18px;
+            padding: 18px;
+            transform: perspective(1000px) rotateY(-6deg) rotateX(4deg);
+            transition: transform 0.6s ease;
+            box-shadow: 0 30px 60px -20px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.03);
         }
+        .glass-card:hover { transform: perspective(1000px) rotateY(0) rotateX(0); }
 
-        .glass-card:hover {
-            transform: rotateY(0) rotateX(0);
+        .terminal {
+            background: #080810;
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 10px;
+            padding: 20px 22px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.8;
         }
-
-        .video-wrapper {
-            border-radius: 12px;
-            overflow: hidden;
-            aspect-ratio: 16/9;
-            background: #000;
-            position: relative;
+        .terminal .comment { color: #3d4f63; }
+        .terminal .cmd { color: var(--accent); }
+        .terminal .out { color: #94a3b8; }
+        .terminal-bar {
+            display: flex;
+            gap: 7px;
+            margin-bottom: 14px;
         }
-        
-        .video-wrapper iframe {
-            width: 100%;
-            height: 100%;
-        }
-
-        /* stats section
-           simple grid
-        */
-        .stats-strip {
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            background: rgba(0,0,0,0.3);
-            padding: 40px 0;
-            margin-top: 60px; /* spacing from hero */
-            position: relative;
-            z-index: 10;
-        }
-
-        .stats-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            text-align: center;
-        }
-
-        .stat-num {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 4px;
-        }
-
-        .stat-label {
-            color: var(--text-sec);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        /* modules section 
-        */
-        .section {
-            padding: 120px 0;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 80px;
-        }
-
-        .section-header h2 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2.5rem;
-            margin-bottom: 16px;
-        }
-
-        .section-header p {
-            color: var(--text-sec);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .module-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 24px;
+        .terminal-bar span {
+            width: 11px; height: 11px; border-radius: 50%;
         }
 
         .module-card {
-            background: var(--bg-sec);
+            background: var(--bg2);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 30px;
-            transition: all 0.3s var(--ease);
+            border-radius: 14px;
+            padding: 28px;
+            transition: all 0.25s ease;
             cursor: default;
         }
-
         .module-card:hover {
             border-color: var(--accent);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px -10px rgba(0, 242, 255, 0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px -10px rgba(0,242,255,0.12);
         }
 
-        .module-icon {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            display: inline-block;
-        }
-
-        .module-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: white;
-        }
-
-        .module-desc {
-            color: var(--text-sec);
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        /* reviews
-        */
-        .reviews-wrapper {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-            position: relative;
-        }
-
-        .review-carousel {
-            overflow: hidden;
-            margin: 0 -12px; /* Offset gap */
-            padding: 10px 0; /* Space for hover effects */
-        }
-
-        .review-track {
-            display: flex;
-            transition: transform 0.5s var(--ease);
-        }
-
-        .review-card {
-            flex: 0 0 33.333%; /* Show 3 at a time */
-            max-width: 33.333%;
-            padding: 0 12px; /* Gutter */
-            display: flex;
-        }
-
-        .review-inner {
-            background: var(--bg-sec);
+        .review-card-inner {
+            background: var(--bg2);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 30px;
+            border-radius: 14px;
+            padding: 26px;
             height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: all 0.3s var(--ease);
-            width: 100%;
+            transition: all 0.25s ease;
+        }
+        .review-card-inner:hover {
+            border-color: rgba(0,242,255,0.35);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px -10px rgba(0,242,255,0.1);
         }
 
-        .review-inner:hover {
-            border-color: var(--accent);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px -10px rgba(0, 242, 255, 0.1);
-        }
-
-        .review-content {
-            margin-bottom: 24px;
-        }
-
-        .review-stars {
-            color: var(--accent);
-            margin-bottom: 16px;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-        }
-
-        .review-text {
-            color: var(--text-sec);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            font-style: italic;
-        }
-
-        .review-text::before {
-            content: '"';
-            color: var(--accent);
-            font-size: 1.5rem;
-            margin-right: 4px;
-        }
-
-        .review-author {
+        .review-track {
             display: flex;
-            align-items: center;
-            gap: 12px;
-            border-top: 1px solid var(--border);
-            padding-top: 20px;
+            transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-
-        .author-avatar {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--bg-main), #1e293b);
-            border-radius: 50%;
+        .review-card {
+            flex: 0 0 33.333%;
+            max-width: 33.333%;
+            padding: 0 10px;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid var(--border);
-            color: white;
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .author-info h4 {
-            color: white;
-            font-size: 0.95rem;
-            font-weight: 600;
-        }
-
-        .verified-badge {
-            font-size: 0.75rem;
-            color: var(--accent);
-            background: var(--accent-dim);
-            padding: 2px 6px;
-            border-radius: 4px;
-            margin-left: 8px;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .carousel-nav {
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-            margin-top: 32px;
-            padding-right: 24px;
-        }
-
-        .nav-btn {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: white;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s var(--ease);
-        }
-
-        .nav-btn:hover {
-            border-color: var(--accent);
-            background: var(--accent-dim);
-            color: var(--accent);
-        }
-
-        .nav-btn:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-            border-color: var(--border);
-            background: transparent;
-            color: white;
-        }
-
-        /* pricing
-        */
-        .pricing-grid {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 24px;
-            display: grid;
-            grid-template-columns: 1fr 1.1fr 1fr; /* center one slightly bigger */
-            gap: 24px;
-            align-items: center;
         }
 
         .price-card {
-            background: var(--bg-sec);
+            background: var(--bg2);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 40px 30px;
+            border-radius: 18px;
+            padding: 36px 28px;
             position: relative;
         }
-
         .price-card.featured {
-            background: linear-gradient(180deg, #13131f 0%, #0a0a0f 100%);
             border-color: var(--accent);
-            box-shadow: 0 0 40px rgba(0, 242, 255, 0.05);
+            background: linear-gradient(160deg, #111120 0%, var(--bg2) 100%);
+            box-shadow: 0 0 50px rgba(0,242,255,0.06), inset 0 1px 0 rgba(0,242,255,0.15);
+            transform: scale(1.04);
             z-index: 2;
-            transform: scale(1.05);
-        }
-
-        .price {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 3rem;
-            font-weight: 700;
-            margin: 20px 0;
-            color: white;
-        }
-
-        .price span { font-size: 1rem; color: var(--text-sec); font-weight: 400; }
-
-        .features-list {
-            list-style: none;
-            margin: 30px 0;
-        }
-
-        .features-list li {
-            padding: 8px 0;
-            color: var(--text-sec);
-            display: flex;
-            gap: 10px;
-        }
-
-        .features-list li.active { color: white; }
-        .features-list li::before { content: "•"; color: var(--border); }
-        .features-list li.active::before { content: "✓"; color: var(--accent); }
-
-        /* code snippet block */
-        .terminal {
-            background: #0d0d12;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 24px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            margin-top: 40px;
-            color: #a5b4fc;
-        }
-        .terminal .comment { color: #64748b; }
-        .terminal .cmd { color: var(--accent); }
-
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 40px 0;
-            text-align: center;
-            color: var(--text-sec);
-            margin-top: 80px;
-        }
-
-        /* version picker modal */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(8px);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: var(--bg-sec);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 500px;
-            width: 90%;
-            position: relative;
-            animation: modalSlideIn 0.3s var(--ease);
-        }
-
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .modal-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .modal-header h3 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-        }
-
-        .modal-header p {
-            color: var(--text-sec);
-            font-size: 0.95rem;
-        }
-
-        .version-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
         }
 
         .version-btn {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255,255,255,0.04);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 20px;
-            color: white;
+            padding: 18px;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s var(--ease);
+            transition: all 0.2s ease;
+            text-align: left;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
-
         .version-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255,255,255,0.08);
             border-color: var(--accent);
             transform: translateY(-2px);
         }
+        .version-btn.eol { opacity: 0.55; }
+        .version-btn.eol:hover { border-color: #ef4444; }
+        .version-btn.deprecating:hover { border-color: #f59e0b; }
+        .version-btn.beta:hover { border-color: #a78bfa; }
 
-        .version-btn .version-num {
+        .badge {
+            display: inline-block;
+            padding: 2px 7px;
+            border-radius: 5px;
+            font-size: 0.68rem;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 1.2rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+        }
+        .badge-eol { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.25); }
+        .badge-dep { background: rgba(245,158,11,0.15); color: #fbbf24; border: 1px solid rgba(245,158,11,0.25); }
+        .badge-beta { background: rgba(167,139,250,0.15); color: #c4b5fd; border: 1px solid rgba(167,139,250,0.25); }
+        .badge-latest { background: rgba(0,242,255,0.12); color: var(--accent); border: 1px solid rgba(0,242,255,0.25); }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(10px);
+            z-index: 200;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-overlay.active { display: flex; }
+
+        .modal-box {
+            background: #0e0e16;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 38px;
+            max-width: 520px;
+            width: 92%;
+            position: relative;
+            animation: slideUp 0.3s ease;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
         }
 
-        .version-btn .version-label {
-            font-size: 0.8rem;
-            color: var(--text-sec);
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            color: var(--text-sec);
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: color 0.2s;
+        .stat-divider {
+            width: 1px;
+            background: var(--border);
+            height: 48px;
         }
 
-        .close-modal:hover {
-            color: white;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.15; transform: translate(-50%, -50%) scale(1); }
-            100% { opacity: 0.25; transform: translate(-50%, -50%) scale(1.1); }
-        }
-
-        /* mobile fix */
         @media (max-width: 768px) {
-            .hero-container, .pricing-grid { grid-template-columns: 1fr; text-align: center; }
-            .hero-text h1 { font-size: 3rem; }
-            .hero-visual { display: none; }
-            .links { display: none; }
-            .price-card.featured { transform: scale(1); }
-            
-            /* review mobile styles */
             .review-card { flex: 0 0 100%; max-width: 100%; }
+            .price-card.featured { transform: scale(1); }
         }
     </style>
 </head>
 <body>
 
-    <nav id="navbar">
-        <div class="nav-content">
-            <a href="#" class="logo">
-                <span>//</span> cyemer
-            </a>
-            <ul class="links">
-                <li><a href="#features">Features</a></li>
-                <li><a href="#modules">Modules</a></li>
-                <li><a href="#reviews">Reviews</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-                <li><a href="https://dsc.gg/cyemer" target="_blank">Discord</a></li>
+<nav id="navbar">
+    <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
+        <a href="#" class="font-display font-bold text-2xl flex items-center gap-2 no-underline text-white" style="text-decoration:none">
+            <span style="color:var(--accent)">//</span> cyemer
+        </a>
+        <ul class="hidden md:flex gap-8 list-none">
+            <li><a href="#features" class="text-slate-400 hover:text-white transition-colors text-sm font-medium no-underline" style="text-decoration:none">Features</a></li>
+            <li><a href="#modules" class="text-slate-400 hover:text-white transition-colors text-sm font-medium no-underline" style="text-decoration:none">Modules</a></li>
+            <li><a href="#reviews" class="text-slate-400 hover:text-white transition-colors text-sm font-medium no-underline" style="text-decoration:none">Reviews</a></li>
+            <li><a href="#pricing" class="text-slate-400 hover:text-white transition-colors text-sm font-medium no-underline" style="text-decoration:none">Pricing</a></li>
+            <li><a href="https://dsc.gg/cyemer" target="_blank" class="text-slate-400 hover:text-white transition-colors text-sm font-medium no-underline" style="text-decoration:none">Discord</a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="min-h-screen flex items-center justify-center relative pt-20">
+    <div class="glow-orb" style="top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+    <div class="max-w-6xl w-full mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+        <div>
+            <div class="pill mb-6"><div class="pill-dot"></div> FABRIC 1.21.1 → 1.21.11</div>
+            <h1 class="font-display font-extrabold text-7xl leading-none tracking-tight mb-6 gradient-text">Dominate.<br>Unfairly.</h1>
+            <p class="text-slate-400 text-lg mb-8 leading-relaxed max-w-lg">Stop playing fair. Cyemer is the optimized, undetectable client built for players who want to win - no excuses, no mercy.</p>
+
+            <div class="flex gap-4 flex-wrap">
+                <button class="btn btn-primary download-trigger">
+                    Download (free)
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+                </button>
+                <a href="https://dsc.gg/cyemer" target="_blank" class="btn btn-ghost" style="text-decoration:none">Join Discord</a>
+            </div>
+
+            <div class="terminal mt-8">
+                <div class="terminal-bar">
+                    <span style="background:#ff5f57"></span>
+                    <span style="background:#febc2e"></span>
+                    <span style="background:#28c840"></span>
+                </div>
+                <div class="comment"># easy install on all devices</div>
+                <div>$ <span class="cmd">install</span> the mod</div>
+                <div>$ <span class="cmd">launch</span> minecraft</div>
+                <div class="out">> injected successfully.</div>
+            </div>
+        </div>
+
+        <div class="hidden md:block">
+            <div class="glass-card">
+                <div class="rounded-xl overflow-hidden bg-black" style="aspect-ratio:16/9">
+                    <iframe src="https://www.youtube.com/embed/XJa-KO44ySs?controls=0&rel=0&autoplay=1&mute=1&loop=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" class="w-full h-full"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="border-t border-b py-10" style="border-color:var(--border);background:rgba(0,0,0,0.25)">
+    <div class="max-w-4xl mx-auto flex justify-center items-center gap-0">
+        <div class="flex-1 text-center px-8">
+            <div class="font-display font-bold text-4xl mb-1">Low</div>
+            <div class="text-slate-500 text-xs uppercase tracking-widest">Detectability</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="flex-1 text-center px-8">
+            <div class="font-display font-bold text-4xl mb-1">Godly</div>
+            <div class="text-slate-500 text-xs uppercase tracking-widest">Visuals</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="flex-1 text-center px-8">
+            <div class="font-display font-bold text-4xl mb-1">Always</div>
+            <div class="text-slate-500 text-xs uppercase tracking-widest">Updated</div>
+        </div>
+    </div>
+</div>
+
+<section id="modules" class="py-32">
+    <div class="text-center mb-16 px-6">
+        <h2 class="font-display font-bold text-4xl mb-4">Everything you need.</h2>
+        <p class="text-slate-400 max-w-lg mx-auto">Stripped down to what wins. No bloat, just raw firepower.</p>
+    </div>
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="moduleContainer"></div>
+</section>
+
+<section id="reviews" class="py-32" style="background:rgba(0,0,0,0.2)">
+    <div class="text-center mb-16 px-6">
+        <h2 class="font-display font-bold text-4xl mb-4">Community Feedback</h2>
+        <p class="text-slate-400 max-w-lg mx-auto">Don't take our word for it.</p>
+    </div>
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="overflow-hidden mx-[-10px] py-2">
+            <div class="review-track" id="reviewTrack"></div>
+        </div>
+        <div class="flex justify-end gap-3 mt-8">
+            <button id="prevBtn" onclick="moveCarousel(-1)" class="w-12 h-12 rounded-full flex items-center justify-center transition-all" style="border:1px solid var(--border);background:transparent;color:#fff;cursor:pointer">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button id="nextBtn" onclick="moveCarousel(1)" class="w-12 h-12 rounded-full flex items-center justify-center transition-all" style="border:1px solid var(--border);background:transparent;color:#fff;cursor:pointer">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+        </div>
+    </div>
+</section>
+
+<section id="pricing" class="py-32">
+    <div class="text-center mb-16 px-6">
+        <h2 class="font-display font-bold text-4xl mb-4">Pricing</h2>
+        <p class="text-slate-400">Good cheats shouldn't cost a fortune.</p>
+    </div>
+    <div class="max-w-4xl mx-auto px-6 grid md:grid-cols-3 gap-6 items-center">
+        <div class="price-card">
+            <h3 class="font-display font-bold text-xl mb-1">Basic</h3>
+            <p class="text-slate-500 text-sm mb-4">Get started for free</p>
+            <div class="font-display font-bold text-5xl mb-6">$0<span class="text-base font-normal text-slate-500">/forever</span></div>
+            <ul class="space-y-3 mb-8 text-sm">
+                <li class="flex items-center gap-3 text-white"><span style="color:var(--accent)">✓</span> Core Modules</li>
+                <li class="flex items-center gap-3 text-white"><span style="color:var(--accent)">✓</span> Basic Support</li>
+                <li class="flex items-center gap-3 text-slate-600">• Config Cloud</li>
+                <li class="flex items-center gap-3 text-slate-600">• Priority Support</li>
             </ul>
+            <button class="btn btn-ghost download-trigger w-full justify-center">Download</button>
         </div>
-    </nav>
 
-    <section class="hero">
-        <div class="glow-orb"></div>
-        <div class="hero-container">
-            <div class="hero-text">
-                <div class="pill">FABRIC 1.21.1 -> 1.21.4</div>
-                <h1>Dominate.<br>Unfairly.</h1>
-                <p>Stop playing fair. Cyemer is the optimized, undetectable client designed for players who want to win, regardless of the cost.</p>
-                
-                <div class="btn-group">
-                    <a href="#" class="btn btn-primary download-trigger">
-                        Download Client (free)
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
-                    </a>
-                    <a href="https://dsc.gg/cyemer" class="btn btn-secondary" target="_blank">
-                        Join Discord for support and configs
-                    </a>
-                </div>
-
-                <div class="terminal">
-                    <div class="comment">// easy install process</div>
-                    <div>$ <span class="cmd">run</span> CyemerInstaller.jar</div>
-                    <div>$ <span class="cmd">launch</span> minecraft</div>
-                    <div>> injected successfully.</div>
-                </div>
-            </div>
-
-            <div class="hero-visual">
-                <div class="glass-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/XJa-KO44ySs?controls=0&rel=0&autoplay=1&mute=1&loop=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-                    </div>
-                </div>
-            </div>
+        <div class="price-card featured">
+            <div class="pill absolute" style="top:-14px;left:50%;transform:translateX(-50%);background:var(--accent);color:#000;border:none">RECOMMENDED</div>
+            <h3 class="font-display font-bold text-xl mb-1">Pro</h3>
+            <p class="text-slate-500 text-sm mb-4">For serious players</p>
+            <div class="font-display font-bold text-5xl mb-6">$?<span class="text-base font-normal text-slate-500">/once</span></div>
+            <ul class="space-y-3 mb-8 text-sm">
+                <li class="flex items-center gap-3 text-white"><span style="color:var(--accent)">✓</span> All Core Modules</li>
+                <li class="flex items-center gap-3 text-white"><span style="color:var(--accent)">✓</span> Bypass Features</li>
+                <li class="flex items-center gap-3 text-white"><span style="color:var(--accent)">✓</span> Private Configs</li>
+                <li class="flex items-center gap-3 text-white"><span style="color:var(--accent)">✓</span> Direct Dev Support</li>
+            </ul>
+            <button class="btn btn-primary w-full justify-center" disabled style="opacity:0.7;cursor:not-allowed">Coming Soon</button>
         </div>
-    </section>
 
-    <div class="stats-strip">
-        <div class="stats-grid">
-            <div class="stat-item">
-                <div class="stat-num">Low</div>
-                <div class="stat-label">Detectability</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-num">Godly</div>
-                <div class="stat-label">Visuals</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-num">Constant</div>
-                <div class="stat-label">Support</div>
-            </div>
+        <div class="price-card">
+            <h3 class="font-display font-bold text-xl mb-1">Lifetime</h3>
+            <p class="text-slate-500 text-sm mb-4">Own it forever</p>
+            <div class="font-display font-bold text-5xl mb-6">$?<span class="text-base font-normal text-slate-500">/once</span></div>
+            <ul class="space-y-3 mb-8 text-sm">
+                <li class="flex items-center gap-3 text-white"><span style="color:var(--accent)">✓</span> Everything in Pro</li>
+                <li class="flex items-center gap-3 text-white"><span style="color:var(--accent)">✓</span> Beta Access</li>
+                <li class="flex items-center gap-3 text-white"><span style="color:var(--accent)">✓</span> Custom Cape</li>
+            </ul>
+            <button class="btn btn-ghost w-full justify-center" disabled style="opacity:0.7;cursor:not-allowed">Coming Soon</button>
         </div>
     </div>
+</section>
 
-    <section id="modules" class="section">
-        <div class="section-header">
-            <h2>Everything you need.</h2>
-            <p>We stripped out the bloat and kept the features that actually secure the win.</p>
+<footer class="border-t py-10 text-center text-slate-600 text-sm mt-10" style="border-color:var(--border)">
+    <p>&copy; 2025 Cyemer Client. Not affiliated with Mojang Studios.</p>
+</footer>
+
+<div class="modal-overlay" id="versionModal">
+    <div class="modal-box">
+        <button onclick="closeModal()" class="absolute top-5 right-5 text-slate-500 hover:text-white transition-colors text-2xl" style="background:none;border:none;cursor:pointer">&times;</button>
+        <div class="text-center mb-7">
+            <h3 class="font-display font-bold text-3xl mb-2">Pick a Version</h3>
+            <p class="text-slate-400 text-sm">Choose the version that matches your game</p>
         </div>
-
-        <div class="module-grid" id="moduleContainer">
-            </div>
-    </section>
-
-    <section id="reviews" class="section" style="background: rgba(0,0,0,0.2);">
-        <div class="section-header">
-            <h2>Community Feedback</h2>
-            <p>Don't take our word for it. See what top players are saying.</p>
+        <div class="grid grid-cols-2 gap-3 mb-4">
+            <button class="version-btn eol" onclick="downloadVersion('1.21.1')">
+                <span class="font-mono text-lg">1.21.1</span>
+                <div class="flex items-center gap-2">
+                    <span class="text-xs text-slate-500">Fabric</span>
+                    <span class="badge badge-eol">EOL</span>
+                </div>
+            </button>
+            <button class="version-btn eol" onclick="downloadVersion('1.21.2')">
+                <span class="font-mono text-lg">1.21.2</span>
+                <div class="flex items-center gap-2">
+                    <span class="text-xs text-slate-500">Fabric</span>
+                    <span class="badge badge-eol">EOL</span>
+                </div>
+            </button>
+            <button class="version-btn eol" onclick="downloadVersion('1.21.3')">
+                <span class="font-mono text-lg">1.21.3</span>
+                <div class="flex items-center gap-2">
+                    <span class="text-xs text-slate-500">Fabric</span>
+                    <span class="badge badge-eol">EOL</span>
+                </div>
+            </button>
+            <button class="version-btn deprecating" onclick="downloadVersion('1.21.4')">
+                <span class="font-mono text-lg">1.21.4</span>
+                <div class="flex items-center gap-2">
+                    <span class="text-xs text-slate-500">Fabric</span>
+                    <span class="badge badge-dep">DEPRECATING</span>
+                </div>
+            </button>
+            <button class="version-btn beta" onclick="downloadVersion('1.21.11')" style="grid-column:span 2">
+                <span class="font-mono text-lg">1.21.11</span>
+                <div class="flex items-center gap-2">
+                    <span class="text-xs text-slate-500">Fabric</span>
+                    <span class="badge badge-beta">BETA</span>
+                </div>
+            </button>
         </div>
-
-        <div class="reviews-wrapper">
-            <div class="review-carousel">
-                <div class="review-track" id="reviewTrack">
-                    </div>
-            </div>
-
-            <div class="carousel-nav">
-                <button class="nav-btn" id="prevBtn" onclick="moveCarousel(-1)">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-                </button>
-                <button class="nav-btn" id="nextBtn" onclick="moveCarousel(1)">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <section id="pricing" class="section">
-        <div class="section-header">
-            <h2>Pricing</h2>
-            <p>High quality cheats shouldn't cost a fortune.</p>
-        </div>
-
-        <div class="pricing-grid">
-            <div class="price-card">
-                <h3>Basic</h3>
-                <div class="price">$0<span>/forever</span></div>
-                <ul class="features-list">
-                    <li class="active">Core Modules</li>
-                    <li class="active">Basic Support</li>
-                    <li>Config Cloud</li>
-                    <li>Priority Support</li>
-                </ul>
-                <a href="#" download class="btn btn-secondary download-trigger" style="width: 100%; justify-content: center;">Download</a>
-            </div>
-
-            <div class="price-card featured">
-                <div class="pill" style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--accent); color: black;">RECOMMENDED</div>
-                <h3>Pro</h3>
-                <div class="price">$?<span>/once</span></div>
-                <ul class="features-list">
-                    <li class="active">All Core Modules</li>
-                    <li class="active">Bypass Features</li>
-                    <li class="active">Private Configs</li>
-                    <li class="active">Direct Dev Support</li>
-                </ul>
-                <button class="btn btn-primary" style="width: 100%; justify-content: center;">Coming Soon</button>
-            </div>
-
-            <div class="price-card">
-                <h3>Lifetime</h3>
-                <div class="price">$?<span>/once</span></div>
-                <ul class="features-list">
-                    <li class="active">Everything in Pro</li>
-                    <li class="active">Beta Access</li>
-                    <li class="active">Custom Cape</li>
-                </ul>
-                <button class="btn btn-secondary" style="width: 100%; justify-content: center;">Coming Soon</button>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Cyemer Client. Not affiliated with Mojang Studios.</p>
-        </div>
-    </footer>
-
-    <div class="modal-overlay" id="versionModal">
-        <div class="modal-content">
-            <button class="close-modal" onclick="closeModal()">&times;</button>
-            <div class="modal-header">
-                <h3>Select Your Version</h3>
-                <p>Choose your Minecraft version to download the compatible client</p>
-            </div>
-            <div class="version-grid">
-                <button class="version-btn" onclick="downloadVersion('1.21.1')">
-                    <span class="version-num">1.21.1</span>
-                    <span class="version-label">Fabric</span>
-                </button>
-                <button class="version-btn" onclick="downloadVersion('1.21.2')">
-                    <span class="version-num">1.21.2</span>
-                    <span class="version-label">Fabric</span>
-                </button>
-                <button class="version-btn" onclick="downloadVersion('1.21.3')">
-                    <span class="version-num">1.21.3</span>
-                    <span class="version-label">Fabric</span>
-                </button>
-                <button class="version-btn" onclick="downloadVersion('1.21.4')">
-                    <span class="version-num">1.21.4</span>
-                    <span class="version-label">Fabric</span>
-                </button>
-            </div>
-        </div>
+        <p class="text-slate-600 text-xs text-center">EOL versions no longer receive updates or support.</p>
     </div>
+</div>
 
-    <script>
-        // version download URLs
-        const versionUrls = {
-            '1.21.1': 'downloads/Cyemer-1.21.1.jar',
-            '1.21.2': 'downloads/Cyemer-1.21.2.jar',
-            '1.21.3': 'downloads/Cyemer-1.21.3.jar',
-            '1.21.4': 'downloads/Cyemer-1.21.4.jar'
-        };
+<script>
+    const versionUrls = {
+        '1.21.1':  'downloads/Cyemer-1.21.1.jar',
+        '1.21.2':  'downloads/Cyemer-1.21.2.jar',
+        '1.21.3':  'downloads/Cyemer-1.21.3.jar',
+        '1.21.4':  'downloads/Cyemer-1.21.4.jar',
+        '1.21.11': 'downloads/Cyemer-1.21.11.jar',
+    };
 
-        // open 
-        function openModal() {
-            document.getElementById('versionModal').classList.add('active');
-        }
+    function openModal() { document.getElementById('versionModal').classList.add('active'); }
+    function closeModal() { document.getElementById('versionModal').classList.remove('active'); }
 
-        // close 
-        function closeModal() {
-            document.getElementById('versionModal').classList.remove('active');
-        }
+    function downloadVersion(v) {
+        const a = document.createElement('a');
+        a.href = versionUrls[v];
+        a.download = `cyemer-${v}.jar`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        closeModal();
+    }
 
-        // download specific version
-        function downloadVersion(version) {
-            const url = versionUrls[version];
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `cyemer-${version}.jar`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            closeModal();
-        }
+    document.getElementById('versionModal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
 
-        // close when clicking outside
-        document.getElementById('versionModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.download-trigger').forEach(btn => {
+            btn.addEventListener('click', e => { e.preventDefault(); openModal(); });
         });
+    });
 
-        // attach to all download buttons
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.download-trigger').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    openModal();
-                });
-            });
+    const features = [
+        { icon: "⚔️", title: "Fakelag", desc: "Dynamically lag to dodge enemy attacks. No paid client has made this module as powerful as ours (yet)." },
+        { icon: "😵", title: "AutoMace", desc: "Automatically hit insane mace shots like you're a HT1. Comes with StunSlam - most paid clients don't have this yet." },
+        { icon: "📖", title: "HudEditor", desc: "Manage beautiful HUD elements with ease, showing info your opponents will never have." },
+        { icon: "🏥", title: "AutoTotem", desc: "Equips totems automatically with smart inventory management so stone doesn't end up in your hotbar - totems do." },
+        { icon: "📱", title: "Android Support", desc: "Full support for Android as well as desktop. Crashes get patched fast." },
+        { icon: "👻", title: "SelfDestruct", desc: "Wipe the client for screenshares. Doesn't even show up in your mods folder." },
+        { icon: "🔧", title: "Optimizer", desc: "Powerful built-in optimization so it feels like vanilla." },
+        { icon: "💥", title: "AnchorAura", desc: "Auto-explodes respawn anchors and shields you from the blast. Our 'block off' feature is unique to free clients." },
+        { icon: "📦", title: "And more", desc: "Way too much to list here - download and see for yourself." }
+    ];
+
+    const container = document.getElementById('moduleContainer');
+    features.forEach(f => {
+        const card = document.createElement('div');
+        card.className = 'module-card';
+        card.innerHTML = `
+            <div style="font-size:1.9rem;margin-bottom:16px">${f.icon}</div>
+            <div style="font-size:1.1rem;font-weight:600;margin-bottom:8px;color:#fff;font-family:'JetBrains Mono',monospace">${f.title}</div>
+            <div style="color:#64748b;font-size:0.9rem;line-height:1.55">${f.desc}</div>
+        `;
+        container.appendChild(card);
+    });
+
+    window.addEventListener('scroll', () => {
+        document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', function(e) {
+            const t = this.getAttribute('href');
+            if (t !== '#') { e.preventDefault(); document.querySelector(t).scrollIntoView({ behavior: 'smooth' }); }
         });
+    });
 
-        // module data config
-        const features = [
-            { icon: "⚔️", title: "Fakelag", desc: "Dynamically lag to dodge enemies attacks. No paid client has made this module as powerful as ours (yet)." },
-            { icon: "😵", title: "AutoMace", desc: "Automatically hit INSANE mace shots like you're a HT1. Comes with a StunSlam, some paid clients dont have this yet!" },
-            { icon: "📖", title: "HudEditor", desc: "Manage beautiful HUD elements with ease, to get information your opponent would never have access to." },
-            { icon: "🏥️", title: "AutoTotem", desc:"Easily equip totems. Comes with smart inventory management (so blocks like stone arent in your hotbar - totems are)." },
-            { icon: "📱", title: "Android support", desc: "We support android as well as computers - if it crashes, we can apply patches and fixes quickly!" },
-            { icon: "👻", title: "SelfDestruct", desc: "Self-destruct the client for screenshares. It doesnt even show in your mods folder!" },
-            { icon: "🔧", title: "Optimizer", desc: "Powerful optimization so you feel like you're playing normally." },
-            { icon: "💥", title: "AnchorAura", desc: "Explodes respawn anchors and protects you from the blast. No free client has our 'block off' feature (yet)" },            
-            { icon: "📦", title: "And so much more", desc: "Theres to much to name here - download the client and see it for yourself!" }
-        ];
+    const reviews = [
+        { user: "Vikas_999", text: "Just tried StunSlam and it's incredible - honestly better than most paid clients' versions. Super consistent, doesn't flag, looks totally legit from their side. Only downside is version support but once that gets sorted this client's basically flawless. Huge W." , rating: 5 },
+        { user: "Sir Jonathen the 19th", text: "Solid month of use, never been banned, flagged, or suspected. Over 2000 wins on a server, under 200 losses since I started. Went from 100W | 200L to 2000W | 350L. Compared to paid clients I'd rate it 7/10, against other free clients it's easy 10/10.", rating: 5 },
+        { user: "Barely Awake", text: "+rep this client is like a new WM (window manager for all you non-linux users) - hard to get used to but soo good once you do", rating: 5 },
+        { user: "qhxst", text: "goes hard. straight up one of the cleanest I've touched. raw features that actually work. respect to the devs for keeping it real.", rating: 5 },
+        { user: "material", text: "10/10 client and staff team is very kind", rating: 5 }
+    ];
 
-        // logic to render cards
-        const container = document.getElementById('moduleContainer');
-        
-        features.forEach(f => {
+    let idx = 0;
+    const track = document.getElementById('reviewTrack');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function initReviews() {
+        reviews.forEach(r => {
             const card = document.createElement('div');
-            card.className = 'module-card';
+            card.className = 'review-card';
             card.innerHTML = `
-                <div class="module-icon">${f.icon}</div>
-                <div class="module-title">${f.title}</div>
-                <div class="module-desc">${f.desc}</div>
-            `;
-            container.appendChild(card);
-        });
-
-        // basically adds the blur when u scroll down
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-
-        // smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = this.getAttribute('href');
-                if (target !== '#') {
-                    document.querySelector(target).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        /*
-           config for carousel 
-           ldkiasdfnds
-        */
-        const reviewsConfig = [
-            {
-                user: "Vikas_999",
-                text: "I just tried out StunSlam, and it’s incredible. Honestly, I’d say it’s even better than most paid clients’ StunSlams. It’s super consistent, doesn’t flag, and looks totally legit from the other person’s perspective. The only downside right now is version support, but once Lime updates that, this client will be pretty much flawless. Huge W for Cyemer.",
-                rating: 5
-            },
-            {
-                user: "Sir Jonathen the 19th",
-                text: "W client used for a solid month, never been banned, flagged or even suspected of cheating. over 2000 wins on a server, and under 200 losses since I started using. Went from 100 wins | 200 losses to 2000 wins | 350 losses, updates always work as expected. overall if I compare this to paid clients, I would rate it 7/10, compared to other free clients EASY 10/10, absolutely obliterates ALL of them in features, bypassing, and visuals.",
-                rating: 5
-            },
-            {
-                user: "Barely Awake",
-                text: "+rep this client is like a new WM (window manager for all you non-linux users) hard to get used to but soo good when u get used to it",
-                rating: 5
-            },
-            {
-                user: "qhxst",
-                text: "this client goes hard. straight up one of the cleanest Ive touched no bs, just raw features that actually work. respect to the devs for keeping it real and not pumping out some mid garbage like half these other clients. solid work ngl",
-                rating: 5
-            },
-            {
-                user: "material",
-                text: "10/10 client and staff team is very kind",
-                rating: 5
-            }
-        ];
-
-        let currentIndex = 0;
-        const track = document.getElementById('reviewTrack');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-
-        // generate avatar initials (maybe just use their actual avatar)
-        function getInitials(name) {
-            return name.substring(0, 2).toUpperCase();
-        }
-
-        // show reviews
-        function initReviews() {
-            reviewsConfig.forEach(review => {
-                const card = document.createElement('div');
-                card.className = 'review-card';
-                card.innerHTML = `
-                    <div class="review-inner">
-                        <div class="review-content">
-                            <div class="review-stars">★★★★★</div>
-                            <div class="review-text">${review.text}</div>
-                        </div>
-                        <div class="review-author">
-                            <div class="author-avatar">${getInitials(review.user)}</div>
-                            <div class="author-info">
-                                <h4>${review.user}</h4>
-                            </div>
-                        </div>
+                <div class="review-card-inner">
+                    <div>
+                        <div style="color:var(--accent);margin-bottom:12px;letter-spacing:2px;font-size:0.85rem">★★★★★</div>
+                        <div style="color:#64748b;font-size:0.9rem;line-height:1.6;font-style:italic">"${r.text}"</div>
                     </div>
-                `;
-                track.appendChild(card);
-            });
-            updateButtons();
-        }
-
-        function moveCarousel(direction) {
-            const cardWidth = 100 / (window.innerWidth <= 768 ? 1 : 3); // 1 card on mobile, 3 on desktop
-            const maxIndex = reviewsConfig.length - (window.innerWidth <= 768 ? 1 : 3);
-
-            currentIndex += direction;
-
-            // clamp index
-            if (currentIndex < 0) currentIndex = 0;
-            if (currentIndex > maxIndex) currentIndex = maxIndex;
-
-            const translateX = -(currentIndex * cardWidth);
-            track.style.transform = `translateX(${translateX}%)`;
-            
-            updateButtons();
-        }
-
-        function updateButtons() {
-            const maxIndex = reviewsConfig.length - (window.innerWidth <= 768 ? 1 : 3);
-            prevBtn.disabled = currentIndex === 0;
-            nextBtn.disabled = currentIndex >= maxIndex;
-        }
-
-        initReviews();
-
-        window.addEventListener('resize', () => {
-            currentIndex = 0; // reset to start on resize to prevent bugs
-            track.style.transform = `translateX(0%)`;
-            updateButtons();
+                    <div style="display:flex;align-items:center;gap:10px;border-top:1px solid var(--border);padding-top:18px;margin-top:20px">
+                        <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#1e293b,#0f172a);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem">${r.user.substring(0,2).toUpperCase()}</div>
+                        <span style="font-weight:600;font-size:0.9rem">${r.user}</span>
+                    </div>
+                </div>
+            `;
+            track.appendChild(card);
         });
+        updateNav();
+    }
 
-    </script>
+    function moveCarousel(dir) {
+        const mobile = window.innerWidth <= 768;
+        const show = mobile ? 1 : 3;
+        const max = reviews.length - show;
+        idx = Math.max(0, Math.min(idx + dir, max));
+        track.style.transform = `translateX(${-(idx * (100 / show))}%)`;
+        updateNav();
+    }
+
+    function updateNav() {
+        const mobile = window.innerWidth <= 768;
+        const max = reviews.length - (mobile ? 1 : 3);
+        prevBtn.style.opacity = idx === 0 ? '0.3' : '1';
+        nextBtn.style.opacity = idx >= max ? '0.3' : '1';
+        prevBtn.disabled = idx === 0;
+        nextBtn.disabled = idx >= max;
+    }
+
+    window.addEventListener('resize', () => { idx = 0; track.style.transform = 'translateX(0%)'; updateNav(); });
+
+    initReviews();
+</script>
 </body>
 </html>
