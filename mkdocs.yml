@@ -1,0 +1,39 @@
+site_name: Cyemer Docs
+theme:
+  name: material
+  palette: 
+    # light mode (bruh)
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+nav:
+  - Home: index.md
+  - Setup Guide: setup.md
+  - Modules: 
+    - TriggerBot: modules/triggerbot.md
+    - AimAssist: modules/aimassist.md
+  - Scripting API: 
+    - doesntExist: thisdoesntexistyet.md
+    
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - attr_list
+
