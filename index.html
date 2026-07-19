@@ -1,5 +1,4 @@
 <!-- THIS IS ALL AI GENERATED, I AINT WRITING HTML --!>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,14 +11,14 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased}
 :root{
-  --bg:#0c0c10;
-  --surface:#13131a;
-  --surface2:#18181f;
+  --bg:#0a0a0f;
+  --surface:#131319;
+  --surface2:#1a1a22;
   --border:rgba(255,255,255,0.07);
   --border-hover:rgba(255,255,255,0.14);
-  --accent:#7c6bff;
-  --accent-soft:rgba(124,107,255,0.12);
-  --accent-border:rgba(124,107,255,0.3);
+  --accent:#00d9ff;
+  --accent-soft:rgba(0,217,255,0.12);
+  --accent-border:rgba(0,217,255,0.3);
   --white:#f4f4f8;
   --sub:#6b6b80;
   --muted:#3a3a4a;
@@ -33,12 +32,13 @@ body{background:var(--bg);color:var(--white);font-family:'Outfit',sans-serif;ove
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--muted);border-radius:2px}
 
-/* fade-in on load */
 @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
 @keyframes scaleIn{from{opacity:0;transform:scale(0.93)}to{opacity:1;transform:scale(1)}}
-@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(0.85)}}
+@keyframes glow{0%,100%{box-shadow:0 0 10px var(--accent),0 0 20px rgba(0,217,255,0.3)}50%{box-shadow:0 0 15px var(--accent),0 0 30px rgba(0,217,255,0.4)}}
+
 .anim-1{animation:fadeUp .6s ease both}
 .anim-2{animation:fadeUp .6s .1s ease both}
 .anim-3{animation:fadeUp .6s .2s ease both}
@@ -53,7 +53,7 @@ nav{
   animation:slideDown .5s ease both;
 }
 nav.scrolled{
-  background:rgba(12,12,16,0.85);
+  background:rgba(10,10,15,0.92);
   backdrop-filter:blur(20px);
   border-bottom:1px solid var(--border);
 }
@@ -64,10 +64,8 @@ nav.scrolled{
 }
 .logo-dot{
   width:8px;height:8px;border-radius:50%;background:var(--accent);
-  box-shadow:0 0 10px var(--accent);
-  animation:pulse 2.5s ease-in-out infinite;
+  animation:glow 2.5s ease-in-out infinite;
 }
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(0.85)}}
 .nav-links{display:flex;gap:32px;list-style:none}
 .nav-links a{
   font-size:.875rem;font-weight:500;color:var(--sub);
@@ -75,23 +73,23 @@ nav.scrolled{
 }
 .nav-links a:hover{color:var(--white)}
 .nav-btn{
-  padding:9px 20px;background:var(--accent);color:#fff;
+  padding:9px 20px;background:var(--accent);color:#000;
   border:none;border-radius:8px;font-family:'Outfit',sans-serif;
   font-size:.875rem;font-weight:600;cursor:pointer;transition:all .2s;
 }
-.nav-btn:hover{background:#9585ff;transform:translateY(-1px)}
+.nav-btn:hover{background:#00f0ff;transform:translateY(-1px)}
 
-.rebuild-bar{
+.launch-bar{
   position:fixed;top:64px;left:0;right:0;z-index:90;
-  background:rgba(255,159,67,0.08);
-  border-bottom:1px solid var(--warn-border);
+  background:rgba(0,217,255,0.08);
+  border-bottom:1px solid var(--accent-border);
   padding:9px 40px;
   display:flex;align-items:center;justify-content:center;gap:10px;
   backdrop-filter:blur(10px);
   animation:slideDown .5s .1s ease both;
 }
-.rb-dot{width:6px;height:6px;border-radius:50%;background:var(--warn);animation:pulse 1.8s ease-in-out infinite;flex-shrink:0}
-.rb-text{font-size:.8rem;font-weight:500;color:var(--warn);font-family:'JetBrains Mono',monospace}
+.lb-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 1.8s ease-in-out infinite;flex-shrink:0}
+.lb-text{font-size:.8rem;font-weight:500;color:var(--accent);font-family:'JetBrains Mono',monospace}
 
 .hero{
   min-height:100vh;
@@ -103,7 +101,7 @@ nav.scrolled{
   position:absolute;pointer-events:none;
   top:50%;left:50%;transform:translate(-50%,-60%);
   width:900px;height:600px;
-  background:radial-gradient(ellipse,rgba(124,107,255,0.06) 0%,transparent 65%);
+  background:radial-gradient(ellipse,rgba(0,217,255,0.08) 0%,transparent 65%);
   animation:fadeIn 1.2s ease both;
 }
 .hero-inner{
@@ -127,7 +125,7 @@ h1{
   color:var(--white);margin-bottom:20px;
 }
 h1 span{
-  background:linear-gradient(130deg,#a89bff 0%,#7c6bff 50%,#5e8eff 100%);
+  background:linear-gradient(130deg,#00f0ff 0%,#00d9ff 50%,#00b8e6 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
 .hero-p{
@@ -135,45 +133,44 @@ h1 span{
   max-width:440px;margin-bottom:20px;
 }
 .alert-box{
-  background:var(--warn-soft);border:1px solid var(--warn-border);
+  background:var(--accent-soft);border:1px solid var(--accent-border);
   border-radius:10px;padding:14px 16px;margin-bottom:32px;
   display:flex;gap:12px;
 }
 .alert-icon{font-size:1rem;flex-shrink:0;margin-top:1px}
-.alert-box p{font-size:.85rem;font-weight:400;color:#c4895a;line-height:1.55}
-.alert-box strong{color:var(--warn);font-weight:600}
+.alert-box p{font-size:.85rem;font-weight:400;color:#4dd9ff;line-height:1.55}
+.alert-box strong{color:var(--accent);font-weight:600}
 .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
 .btn-p{
-  padding:13px 28px;background:var(--accent);color:#fff;
+  padding:13px 28px;background:var(--accent);color:#000;
   border:none;border-radius:10px;font-family:'Outfit',sans-serif;
   font-size:.9rem;font-weight:600;cursor:pointer;transition:all .2s;
   display:inline-flex;align-items:center;gap:8px;
 }
-.btn-p:hover{background:#9585ff;transform:translateY(-2px);box-shadow:0 8px 30px rgba(124,107,255,0.3)}
+.btn-p:hover{background:#00f0ff;transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,217,255,0.3)}
 .btn-g{
   padding:13px 28px;background:transparent;color:var(--white);
   border:1px solid var(--border-hover);border-radius:10px;
   font-family:'Outfit',sans-serif;font-size:.9rem;font-weight:500;
   cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;
 }
-.btn-g:hover{border-color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.04)}
+.btn-g:hover{border-color:rgba(0,217,255,0.3);background:rgba(0,217,255,0.04)}
 
-/* 3D glass terminal */
 .terminal-scene{
   perspective:900px;
   perspective-origin:50% 50%;
 }
 .terminal-card{
   background:rgba(20,18,35,0.55);
-  border:1px solid rgba(255,255,255,0.13);
+  border:1px solid rgba(0,217,255,0.2);
   border-radius:16px;overflow:hidden;
   backdrop-filter:blur(28px) saturate(160%);
   -webkit-backdrop-filter:blur(28px) saturate(160%);
   box-shadow:
     0 2px 0 rgba(255,255,255,0.07) inset,
     0 32px 64px -16px rgba(0,0,0,0.7),
-    0 0 0 1px rgba(124,107,255,0.08),
-    0 8px 32px rgba(124,107,255,0.1);
+    0 0 0 1px rgba(0,217,255,0.1),
+    0 8px 32px rgba(0,217,255,0.12);
   transform:rotateY(-8deg) rotateX(4deg) translateZ(0);
   transition:transform .55s cubic-bezier(.22,.68,0,1.2), box-shadow .4s ease;
   will-change:transform;
@@ -183,14 +180,14 @@ h1 span{
   box-shadow:
     0 2px 0 rgba(255,255,255,0.1) inset,
     0 48px 80px -20px rgba(0,0,0,0.75),
-    0 0 0 1px rgba(124,107,255,0.18),
-    0 16px 48px rgba(124,107,255,0.18);
+    0 0 0 1px rgba(0,217,255,0.25),
+    0 16px 48px rgba(0,217,255,0.2);
 }
 .code-card-bar{
   background:rgba(255,255,255,0.04);
   padding:12px 16px;
   display:flex;align-items:center;gap:8px;
-  border-bottom:1px solid rgba(255,255,255,0.07);
+  border-bottom:1px solid rgba(0,217,255,0.15);
 }
 .bar-dot{width:10px;height:10px;border-radius:50%}
 .bar-title{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--sub);margin-left:8px}
@@ -198,7 +195,7 @@ h1 span{
 .code-c{color:rgba(255,255,255,0.2)}
 .code-k{color:var(--accent)}
 .code-s{color:#7ec4a8}
-.code-v{color:#ff9f43}
+.code-v{color:#00d9ff}
 .type-cursor{
   display:inline-block;width:8px;height:15px;
   background:var(--accent);border-radius:1px;
@@ -211,8 +208,8 @@ h1 span{
   display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px;
 }
 .metric{
-  background:rgba(20,18,35,0.4);
-  border:1px solid rgba(255,255,255,0.08);
+  background:rgba(0,217,255,0.05);
+  border:1px solid rgba(0,217,255,0.15);
   border-radius:10px;padding:16px;text-align:center;
   backdrop-filter:blur(16px);
   transition:border-color .2s,transform .2s;
@@ -222,7 +219,6 @@ h1 span{
 .metric-val.accent{color:var(--accent)}
 .metric-lbl{font-size:.72rem;font-weight:500;color:var(--sub);margin-top:3px;text-transform:uppercase;letter-spacing:.06em}
 
-/* loading skeleton shimmer for sections */
 @keyframes sectionReveal{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 .reveal{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
@@ -287,7 +283,7 @@ h2{
   opacity:0;transform:translateY(16px);
 }
 .rev-card.visible{opacity:1;transform:translateY(0)}
-.rev-card:hover{border-color:var(--border-hover);transform:translateY(-4px)}
+.rev-card:hover{border-color:var(--accent-border);transform:translateY(-4px)}
 .rev-stars{color:var(--accent);font-size:.8rem;letter-spacing:4px;margin-bottom:14px}
 .rev-text{font-size:.875rem;font-weight:300;color:var(--sub);line-height:1.7;font-style:italic;flex:1;margin-bottom:20px}
 .rev-foot{display:flex;align-items:center;gap:10px;padding-top:16px;border-top:1px solid var(--border)}
@@ -316,13 +312,13 @@ h2{
   background:linear-gradient(160deg,var(--surface2) 0%,var(--surface) 100%);
   border-color:var(--accent-border);
   transform:scale(1.04);
-  box-shadow:0 0 40px rgba(124,107,255,0.08);
+  box-shadow:0 0 40px rgba(0,217,255,0.1);
 }
 .pc.f.visible{transform:scale(1.04)}
 .pc.f:hover{transform:scale(1.05)}
 .feat-badge{
   position:absolute;top:-11px;left:50%;transform:translateX(-50%);
-  background:var(--accent);color:#fff;
+  background:var(--accent);color:#000;
   font-size:.65rem;font-weight:700;letter-spacing:.1em;
   padding:3px 12px;border-radius:20px;white-space:nowrap;
 }
@@ -342,9 +338,9 @@ h2{
   transition:all .2s;
   background:transparent;color:var(--white);border:1px solid var(--border-hover);
 }
-.pc-btn:hover:not(:disabled){background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.2)}
-.pc-btn.ab{background:var(--accent);border-color:transparent;color:#fff}
-.pc-btn.ab:hover:not(:disabled){background:#9585ff}
+.pc-btn:hover:not(:disabled){background:rgba(0,217,255,0.08);border-color:rgba(0,217,255,0.3)}
+.pc-btn.ab{background:var(--accent);border-color:transparent;color:#000}
+.pc-btn.ab:hover:not(:disabled){background:#00f0ff}
 .pc-btn:disabled{opacity:.4;cursor:not-allowed}
 
 footer{
@@ -398,10 +394,10 @@ footer p{font-size:.78rem;font-weight:300;color:var(--muted)}
   border-radius:10px;padding:14px;cursor:pointer;
   text-align:left;transition:all .2s;display:flex;flex-direction:column;gap:5px;
 }
-.ver-btn:hover{border-color:var(--border-hover);background:var(--surface2)}
+.ver-btn:hover{border-color:rgba(0,217,255,0.3);background:var(--surface2)}
 .ver-btn.eol:hover{border-color:rgba(248,113,113,.4)}
 .ver-btn.dep:hover{border-color:rgba(251,191,36,.4)}
-.ver-btn.beta:hover{border-color:rgba(167,139,250,.4)}
+.ver-btn.beta:hover{border-color:rgba(0,217,255,.4)}
 .ver-btn.full{grid-column:span 2}
 .ver-n{font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:500;color:var(--white)}
 .ver-m{display:flex;align-items:center;gap:7px}
@@ -409,7 +405,6 @@ footer p{font-size:.78rem;font-weight:300;color:var(--muted)}
 .bdg{padding:2px 6px;border-radius:4px;font-size:.62rem;font-weight:700;letter-spacing:.06em;font-family:'JetBrains Mono',monospace}
 .eol-b{background:rgba(248,113,113,.1);color:#f87171;border:1px solid rgba(248,113,113,.2)}
 .dep-b{background:rgba(251,191,36,.1);color:#fbbf24;border:1px solid rgba(251,191,36,.2)}
-.beta-b{background:rgba(167,139,250,.1);color:#c4b5fd;border:1px solid rgba(167,139,250,.2)}
 .modal-foot{padding:14px 28px;border-top:1px solid var(--border);text-align:center}
 .modal-foot p{font-size:.74rem;font-weight:300;color:var(--sub)}
 
@@ -429,7 +424,7 @@ footer p{font-size:.78rem;font-weight:300;color:var(--muted)}
   .pc.f{transform:none}
   .pc.f.visible{transform:none}
   footer{flex-direction:column;gap:16px;text-align:center;padding:24px 20px}
-  .rebuild-bar{padding:9px 20px}
+  .launch-bar{padding:9px 20px}
 }
 </style>
 </head>
@@ -446,12 +441,12 @@ footer p{font-size:.78rem;font-weight:300;color:var(--muted)}
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="https://dsc.gg/cyemer" target="_blank">Discord</a></li>
   </ul>
-  <button class="nav-btn download-trigger">Download Free</button>
+  <button class="nav-btn" onclick="window.open('https://dsc.gg/cyemer','_blank')">Join Discord</button>
 </nav>
 
-<div class="rebuild-bar">
-  <div class="rb-dot"></div>
-  <span class="rb-text">Cyemer is being rebuilt from the ground up -- downloads still available</span>
+<div class="launch-bar">
+  <div class="lb-dot"></div>
+  <span class="lb-text">Cyemer Reborn is live — join Discord to download</span>
 </div>
 
 <section class="hero">
@@ -460,20 +455,20 @@ footer p{font-size:.78rem;font-weight:300;color:var(--muted)}
     <div class="hero-left">
       <div class="hero-badge anim-1">
         <span class="hero-badge-dot"></span>
-        Fabric 1.21.1 -- 1.21.11
+        Reborn — Live Now
       </div>
-      <h1 class="anim-2">Dominate.<br><span>Unfairly.</span><br>Reborn.</h1>
-      <p class="hero-p anim-3">The unfair advantage, rebuilt from scratch. Cleaner code, stronger bypasses, same ruthless efficiency.</p>
+      <h1 class="anim-2">Rebuilt.<br><span>Ruthless.</span><br>Unstoppable.</h1>
+      <p class="hero-p anim-3">Cyemer Reborn is here. Cleaner code, stronger bypasses, engineered from scratch for dominance.</p>
       <div class="alert-box anim-4">
-        <span class="alert-icon">⚡</span>
-        <p><strong>Cyemer Reborn is in active development.</strong> We're recoding the entire client from scratch. The current build still works -- Reborn drops when it's ready.</p>
+        <span class="alert-icon">🚀</span>
+        <p><strong>Reborn is available now.</strong> Join the Discord to download the latest build. We've completely rewritten the foundation for maximum performance.</p>
       </div>
       <div class="hero-btns anim-5">
-        <button class="btn-p download-trigger">
+        <button class="btn-p" onclick="window.open('https://dsc.gg/cyemer','_blank')">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
-          Download Free
+          Join Discord
         </button>
-        <a class="btn-g" href="https://dsc.gg/cyemer" target="_blank">Join Discord</a>
+        <a class="btn-g" href="#modules">See Features</a>
       </div>
     </div>
     <div class="hero-right anim-right">
@@ -483,31 +478,31 @@ footer p{font-size:.78rem;font-weight:300;color:var(--muted)}
             <div class="bar-dot" style="background:#ff5f57"></div>
             <div class="bar-dot" style="background:#febc2e"></div>
             <div class="bar-dot" style="background:#28c840"></div>
-            <span class="bar-title">install cyemer</span>
+            <span class="bar-title">cyemer reborn</span>
           </div>
           <div class="code-body" id="codeBody">
-            <div id="line1" style="opacity:0"><span class="code-c"># easy install, all platforms</span></div>
-            <div id="line2" style="opacity:0"><span class="code-k">$</span> install <span class="code-s">cyemer</span></div>
-            <div id="line3" style="opacity:0"><span class="code-k">$</span> launch <span class="code-s">minecraft</span></div>
-            <div id="line4" style="opacity:0"><span class="code-v">&gt; injected successfully.</span></div>
-            <div id="line5" style="opacity:0;margin-top:8px"><span class="code-c"># reborn is cooking...</span></div>
-            <div id="line6" style="opacity:0"><span class="code-k">$</span> status <span class="code-s">reborn</span></div>
-            <div id="line7" style="opacity:0"><span class="code-v">&gt; in development -- stay tuned</span><span class="type-cursor"></span></div>
+            <div id="line1" style="opacity:0"><span class="code-c"># cyemer reborn launch</span></div>
+            <div id="line2" style="opacity:0"><span class="code-k">$</span> status <span class="code-s">client</span></div>
+            <div id="line3" style="opacity:0"><span class="code-v">&gt; online and injected</span></div>
+            <div id="line4" style="opacity:0"><span class="code-k">$</span> version <span class="code-s">reborn</span></div>
+            <div id="line5" style="opacity:0"><span class="code-v">&gt; live</span></div>
+            <div id="line6" style="opacity:0;margin-top:8px"><span class="code-c"># rebuilt from the ground up</span></div>
+            <div id="line7" style="opacity:0"><span class="code-k">$</span> join <span class="code-s">discord</span><span class="type-cursor"></span></div>
           </div>
         </div>
       </div>
       <div class="metrics-row">
         <div class="metric">
-          <div class="metric-val accent">Low</div>
-          <div class="metric-lbl">Detection</div>
+          <div class="metric-val accent">Next Gen</div>
+          <div class="metric-lbl">Architecture</div>
         </div>
         <div class="metric">
-          <div class="metric-val">Godly</div>
+          <div class="metric-val">Unmatched</div>
           <div class="metric-lbl">Visuals</div>
         </div>
         <div class="metric">
-          <div class="metric-val accent">Reborn</div>
-          <div class="metric-lbl">Coming Soon</div>
+          <div class="metric-val accent">Live</div>
+          <div class="metric-lbl">Status</div>
         </div>
       </div>
     </div>
@@ -536,48 +531,49 @@ footer p{font-size:.78rem;font-weight:300;color:var(--muted)}
   <div class="pricing-inner">
     <div style="text-align:center;margin-bottom:56px">
       <div class="eyebrow reveal" style="justify-content:center;display:flex">Pricing</div>
-      <h2 class="reveal">Free, forever.</h2>
-      <p class="section-sub reveal" style="margin:0 auto">Start free forever. More tiers coming with Reborn.</p>
+      <h2 class="reveal">Free to start.</h2>
+      <p class="section-sub reveal" style="margin:0 auto">Get Reborn free. Premium tiers available for extra features.</p>
     </div>
     <div class="price-grid">
       <div class="pc">
-        <div class="pc-name">Basic</div>
-        <div class="pc-sub">Get started for free</div>
+        <div class="pc-name">Free</div>
+        <div class="pc-sub">Full Reborn experience</div>
         <div class="pc-price">$0</div>
-        <div class="pc-price-note">Free forever</div>
+        <div class="pc-price-note">Forever free</div>
         <ul class="pc-list">
-          <li class="on"><span class="ck">&#10003;</span> Core Modules</li>
-          <li class="on"><span class="ck">&#10003;</span> Basic Support</li>
-          <li class="off"><span class="xk">·</span> Config Cloud</li>
+          <li class="on"><span class="ck">✓</span> Core Modules</li>
+          <li class="on"><span class="ck">✓</span> Full Bypass</li>
+          <li class="on"><span class="ck">✓</span> Community Support</li>
           <li class="off"><span class="xk">·</span> Priority Support</li>
         </ul>
-        <button class="pc-btn ab download-trigger">Download</button>
+        <button class="pc-btn ab" onclick="window.open('https://dsc.gg/cyemer','_blank')">Download</button>
       </div>
       <div class="pc f">
         <div class="feat-badge">RECOMMENDED</div>
         <div class="pc-name">Pro</div>
-        <div class="pc-sub">For serious players</div>
-        <div class="pc-price">$?</div>
-        <div class="pc-price-note">One-time -- coming soon</div>
+        <div class="pc-sub">Advanced features</div>
+        <div class="pc-price">$49</div>
+        <div class="pc-price-note">One-time purchase</div>
         <ul class="pc-list">
-          <li class="on"><span class="ck">&#10003;</span> All Core Modules</li>
-          <li class="on"><span class="ck">&#10003;</span> Bypass Features</li>
-          <li class="on"><span class="ck">&#10003;</span> Private Configs</li>
-          <li class="on"><span class="ck">&#10003;</span> Direct Dev Support</li>
+          <li class="on"><span class="ck">✓</span> Everything Free</li>
+          <li class="on"><span class="ck">✓</span> Advanced Configs</li>
+          <li class="on"><span class="ck">✓</span> Priority Support</li>
+          <li class="on"><span class="ck">✓</span> Beta Features</li>
         </ul>
-        <button class="pc-btn" disabled>Coming with Reborn</button>
+        <button class="pc-btn ab" onclick="window.open('https://dsc.gg/cyemer','_blank')">Get Pro</button>
       </div>
       <div class="pc">
         <div class="pc-name">Lifetime</div>
         <div class="pc-sub">Own it forever</div>
-        <div class="pc-price">$?</div>
-        <div class="pc-price-note">One-time -- coming soon</div>
+        <div class="pc-price">$99</div>
+        <div class="pc-price-note">One-time purchase</div>
         <ul class="pc-list">
-          <li class="on"><span class="ck">&#10003;</span> Everything in Pro</li>
-          <li class="on"><span class="ck">&#10003;</span> Beta Access</li>
-          <li class="on"><span class="ck">&#10003;</span> Custom Cape</li>
+          <li class="on"><span class="ck">✓</span> Everything in Pro</li>
+          <li class="on"><span class="ck">✓</span> Early Access</li>
+          <li class="on"><span class="ck">✓</span> Custom Cape</li>
+          <li class="on"><span class="ck">✓</span> Lifetime Updates</li>
         </ul>
-        <button class="pc-btn" disabled>Coming with Reborn</button>
+        <button class="pc-btn ab" onclick="window.open('https://dsc.gg/cyemer','_blank')">Go Lifetime</button>
       </div>
     </div>
   </div>
@@ -585,7 +581,7 @@ footer p{font-size:.78rem;font-weight:300;color:var(--muted)}
 
 <footer>
   <div class="footer-logo"><span>cy</span>emer</div>
-  <p>&copy; 2025 Cyemer Client -- Not affiliated with Mojang Studios</p>
+  <p>&copy; 2025 Cyemer Client — Not affiliated with Mojang Studios</p>
   <div class="footer-links">
     <a href="https://dsc.gg/cyemer" target="_blank">Discord</a>
     <a href="#modules">Modules</a>
@@ -593,52 +589,7 @@ footer p{font-size:.78rem;font-weight:300;color:var(--muted)}
   </div>
 </footer>
 
-<div class="modal-overlay" id="modal">
-  <div class="modal">
-    <div class="modal-top">
-      <div>
-        <h3>Pick a Version</h3>
-        <p>Choose the version that matches your game</p>
-      </div>
-      <button class="modal-x" onclick="closeModal()">&times;</button>
-    </div>
-    <div class="modal-mid">
-      <div class="m-warn">
-        <div class="m-warn-head">⚡ Reborn in Development</div>
-        <p>Cyemer is being fully recoded and rebuilt right now. These are the current stable downloads -- fully functional. Follow Discord for the Reborn launch.</p>
-      </div>
-      <div class="m-ai">
-        <p>&#9888;&#65039; Some code is AI generated as the main dev is very busy. This website, for instance, is AI!</p>
-      </div>
-      <div class="ver-grid">
-        <button class="ver-btn eol" onclick="dlVer('1.21.1')">
-          <span class="ver-n">1.21.1</span>
-          <span class="ver-m"><span class="ver-t">Fabric</span><span class="bdg eol-b">EOL</span></span>
-        </button>
-        <button class="ver-btn eol" onclick="dlVer('1.21.2')">
-          <span class="ver-n">1.21.2</span>
-          <span class="ver-m"><span class="ver-t">Fabric</span><span class="bdg eol-b">EOL</span></span>
-        </button>
-        <button class="ver-btn eol" onclick="dlVer('1.21.3')">
-          <span class="ver-n">1.21.3</span>
-          <span class="ver-m"><span class="ver-t">Fabric</span><span class="bdg eol-b">EOL</span></span>
-        </button>
-        <button class="ver-btn dep" onclick="dlVer('1.21.4')">
-          <span class="ver-n">1.21.4</span>
-          <span class="ver-m"><span class="ver-t">Fabric</span><span class="bdg dep-b">DEPRECATING</span></span>
-        </button>
-        <button class="ver-btn beta full" onclick="dlVer('1.21.11')">
-          <span class="ver-n">1.21.11</span>
-          <span class="ver-m"><span class="ver-t">Fabric</span><span class="bdg beta-b">BETA</span></span>
-        </button>
-      </div>
-    </div>
-    <div class="modal-foot"><p>EOL versions no longer receive updates or support</p></div>
-  </div>
-</div>
-
 <script>
-/* terminal typewriter */
 const lines=['line1','line2','line3','line4','line5','line6','line7'];
 lines.forEach((id,i)=>{
   setTimeout(()=>{
@@ -647,7 +598,6 @@ lines.forEach((id,i)=>{
   },700+i*420);
 });
 
-/* 3d mouse tilt */
 const card=document.getElementById('termCard');
 if(card){
   const scene=card.closest('.terminal-scene');
@@ -662,12 +612,11 @@ if(card){
   });
 }
 
-/* modules */
 const mods=[
   {icon:"⚔️",name:"Fakelag",desc:"Dynamically lag to dodge enemy attacks. No paid client has made this as powerful as ours (yet).",tag:"UNIQUE FREE"},
-  {icon:"😵",name:"AutoMace",desc:"Automatically hit insane mace shots. Comes with StunSlam -- most paid clients don't have this yet.",tag:"UNIQUE FREE"},
+  {icon:"😵",name:"AutoMace",desc:"Automatically hit insane mace shots. Comes with StunSlam — most paid clients don't have this yet.",tag:"UNIQUE FREE"},
   {icon:"📖",name:"HudEditor",desc:"Beautiful HUD elements with drag-and-drop management. Info your opponents will never have."},
-  {icon:"🏥",name:"AutoTotem",desc:"Smart inventory management for totems. Stone won't end up in your hotbar -- totems will."},
+  {icon:"🏥",name:"AutoTotem",desc:"Smart inventory management for totems. Stone won't end up in your hotbar — totems will."},
   {icon:"📱",name:"Android Support",desc:"Full support on Android as well as desktop. Crashes get patched fast."},
   {icon:"👻",name:"SelfDestruct",desc:"Wipe the client before screenshares. Doesn't even appear in your mods folder."},
   {icon:"🔧",name:"Optimizer",desc:"Built-in optimization so it feels like vanilla Minecraft. Zero performance cost."},
@@ -683,11 +632,10 @@ mods.forEach((m,i)=>{
   g.appendChild(d);
 });
 
-/* reviews */
 const reviews=[
-  {u:"Vikas_999",t:"Just tried StunSlam and it's incredible -- honestly better than most paid clients' versions. Super consistent, doesn't flag, looks totally legit. Only downside is version support but once that gets sorted this client's basically flawless. Huge W."},
+  {u:"Vikas_999",t:"Just tried StunSlam and it's incredible — honestly better than most paid clients' versions. Super consistent, doesn't flag, looks totally legit. Only downside is version support but once that gets sorted this client's basically flawless. Huge W."},
   {u:"Sir Jonathen the 19th",t:"Solid month of use, never been banned, flagged, or suspected. Over 2000 wins on a server, under 200 losses since I started. Went from 100W|200L to 2000W|350L. Against free clients easy 10/10."},
-  {u:"Barely Awake",t:"+rep this client is like a new WM (window manager for all you non-linux users) -- hard to get used to but soo good once you do"},
+  {u:"Barely Awake",t:"+rep this client is like a new WM (window manager for all you non-linux users) — hard to get used to but soo good once you do"},
   {u:"qhxst",t:"goes hard. straight up one of the cleanest I've touched. raw features that actually work. respect to the devs for keeping it real."},
   {u:"material",t:"10/10 client and staff team is very kind"},
 ];
@@ -696,11 +644,10 @@ reviews.forEach((r,i)=>{
   const d=document.createElement('div');
   d.className='rev-card';
   d.style.transitionDelay=(i*80)+'ms';
-  d.innerHTML=`<div><div class="rev-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="rev-text">"${r.t}"</p></div><div class="rev-foot"><div class="rev-av">${r.u.substring(0,2).toUpperCase()}</div><span class="rev-name">${r.u}</span></div>`;
+  d.innerHTML=`<div><div class="rev-stars">★★★★★</div><p class="rev-text">"${r.t}"</p></div><div class="rev-foot"><div class="rev-av">${r.u.substring(0,2).toUpperCase()}</div><span class="rev-name">${r.u}</span></div>`;
   rg.appendChild(d);
 });
 
-/* scroll reveal */
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){e.target.classList.add('visible')}
@@ -708,17 +655,7 @@ const observer=new IntersectionObserver(entries=>{
 },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal,.mod-card,.rev-card,.pc').forEach(el=>observer.observe(el));
 
-/* nav */
 window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>20)});
-
-/* modal */
-function openModal(){document.getElementById('modal').classList.add('open')}
-function closeModal(){document.getElementById('modal').classList.remove('open')}
-document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))closeModal()});
-document.querySelectorAll('.download-trigger').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();openModal()}));
-
-const urls={'1.21.1':'downloads/Cyemer-1.21.1.jar','1.21.2':'downloads/Cyemer-1.21.2.jar','1.21.3':'downloads/Cyemer-1.21.3.jar','1.21.4':'downloads/Cyemer-1.21.4.jar','1.21.11':'downloads/Cyemer-1.21.11.jar'};
-function dlVer(v){const a=document.createElement('a');a.href=urls[v];a.download=`cyemer-${v}.jar`;document.body.appendChild(a);a.click();document.body.removeChild(a);closeModal()}
 </script>
 </body>
 </html>
