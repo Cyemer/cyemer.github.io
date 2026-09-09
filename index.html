@@ -26,6 +26,9 @@
   --warn:#ff9f43;
   --warn-soft:rgba(255,159,67,0.1);
   --warn-border:rgba(255,159,67,0.25);
+  --reborn:#c084fc;
+  --reborn-soft:rgba(192,132,252,0.1);
+  --reborn-border:rgba(192,132,252,0.28);
 }
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--white);font-family:'Outfit',sans-serif;overflow-x:hidden}
@@ -33,12 +36,10 @@ body{background:var(--bg);color:var(--white);font-family:'Outfit',sans-serif;ove
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--muted);border-radius:2px}
 
-/* fade-in on load */
 @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
 @keyframes scaleIn{from{opacity:0;transform:scale(0.93)}to{opacity:1;transform:scale(1)}}
-@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
 .anim-1{animation:fadeUp .6s ease both}
 .anim-2{animation:fadeUp .6s .1s ease both}
 .anim-3{animation:fadeUp .6s .2s ease both}
@@ -158,7 +159,6 @@ h1 span{
 }
 .btn-g:hover{border-color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.04)}
 
-/* 3D glass terminal */
 .terminal-scene{
   perspective:900px;
   perspective-origin:50% 50%;
@@ -222,8 +222,6 @@ h1 span{
 .metric-val.accent{color:var(--accent)}
 .metric-lbl{font-size:.72rem;font-weight:500;color:var(--sub);margin-top:3px;text-transform:uppercase;letter-spacing:.06em}
 
-/* loading skeleton shimmer for sections */
-@keyframes sectionReveal{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 .reveal{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 
@@ -366,9 +364,10 @@ footer p{font-size:.78rem;font-weight:300;color:var(--muted)}
 .modal-overlay.open{display:flex}
 .modal{
   background:var(--surface);border:1px solid var(--border);
-  border-radius:20px;max-width:460px;width:93%;
+  border-radius:20px;max-width:500px;width:93%;
   overflow:hidden;animation:mup .25s ease;
   box-shadow:0 40px 80px rgba(0,0,0,.6);
+  max-height:90vh;overflow-y:auto;
 }
 @keyframes mup{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
 .modal-top{
@@ -392,6 +391,34 @@ footer p{font-size:.78rem;font-weight:300;color:var(--muted)}
   border-radius:8px;padding:10px 13px;margin-bottom:20px;
 }
 .m-ai p{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--sub)}
+
+.dl-section-label{
+  font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--sub);margin-bottom:10px;margin-top:4px;
+  font-family:'JetBrains Mono',monospace;
+}
+.dl-section-label.reborn-label{color:var(--reborn)}
+
+.reborn-section-box{
+  background:var(--reborn-soft);border:1px solid var(--reborn-border);
+  border-radius:12px;padding:14px 15px;margin-bottom:16px;
+}
+.reborn-section-head{
+  display:flex;align-items:center;gap:8px;margin-bottom:6px;
+}
+.reborn-section-head span{
+  font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--reborn);font-family:'JetBrains Mono',monospace;
+}
+.reborn-dot{width:6px;height:6px;border-radius:50%;background:var(--reborn);animation:pulse 1.8s ease-in-out infinite;flex-shrink:0}
+.reborn-section-box p{font-size:.82rem;font-weight:300;color:#c8a8e8;line-height:1.55}
+.reborn-section-box .java-req{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:10px;padding:5px 10px;
+  background:rgba(192,132,252,0.12);border:1px solid rgba(192,132,252,0.25);
+  border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--reborn);font-weight:600;
+}
+
 .ver-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .ver-btn{
   background:var(--bg);border:1px solid var(--border);
@@ -402,6 +429,8 @@ footer p{font-size:.78rem;font-weight:300;color:var(--muted)}
 .ver-btn.eol:hover{border-color:rgba(248,113,113,.4)}
 .ver-btn.dep:hover{border-color:rgba(251,191,36,.4)}
 .ver-btn.beta:hover{border-color:rgba(167,139,250,.4)}
+.ver-btn.reborn-btn{border-color:var(--reborn-border);background:rgba(192,132,252,0.05)}
+.ver-btn.reborn-btn:hover{border-color:var(--reborn);background:rgba(192,132,252,0.12);box-shadow:0 0 20px rgba(192,132,252,0.1)}
 .ver-btn.full{grid-column:span 2}
 .ver-n{font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:500;color:var(--white)}
 .ver-m{display:flex;align-items:center;gap:7px}
@@ -410,8 +439,42 @@ footer p{font-size:.78rem;font-weight:300;color:var(--muted)}
 .eol-b{background:rgba(248,113,113,.1);color:#f87171;border:1px solid rgba(248,113,113,.2)}
 .dep-b{background:rgba(251,191,36,.1);color:#fbbf24;border:1px solid rgba(251,191,36,.2)}
 .beta-b{background:rgba(167,139,250,.1);color:#c4b5fd;border:1px solid rgba(167,139,250,.2)}
+.reborn-b{background:rgba(192,132,252,0.15);color:var(--reborn);border:1px solid var(--reborn-border)}
+
+.ver-btn.reborn-btn .ver-n{color:var(--reborn)}
+.ver-btn.reborn-btn .ver-t{color:#a87fd0}
+
+.dl-divider{height:1px;background:var(--border);margin:20px 0}
+
 .modal-foot{padding:14px 28px;border-top:1px solid var(--border);text-align:center}
 .modal-foot p{font-size:.74rem;font-weight:300;color:var(--sub)}
+
+.ver-sub{font-size:.65rem;color:var(--sub);font-family:'JetBrains Mono',monospace;margin-top:2px}
+.ver-btn.reborn-btn .ver-sub{color:#a87fd0}
+
+.install-guide{
+  background:rgba(255,255,255,0.02);border:1px solid var(--border);
+  border-radius:10px;padding:14px 15px;margin-top:16px;
+}
+.install-guide-head{
+  font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--sub);margin-bottom:10px;font-family:'JetBrains Mono',monospace;
+}
+.install-steps{display:flex;flex-direction:column;gap:8px}
+.install-step{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:.8rem;font-weight:300;color:var(--sub);line-height:1.5;
+}
+.step-num{
+  min-width:18px;height:18px;border-radius:50%;
+  background:var(--accent-soft);border:1px solid var(--accent-border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.6rem;font-weight:700;color:var(--accent);flex-shrink:0;margin-top:1px;
+}
+.step-num.rb{background:var(--reborn-soft);border-color:var(--reborn-border);color:var(--reborn)}
+.install-step a{color:var(--accent);text-decoration:none}
+.install-step a.rb-link{color:var(--reborn)}
+.install-step a:hover{text-decoration:underline}
 
 @media(max-width:900px){
   nav{padding:0 20px}
@@ -603,13 +666,61 @@ footer p{font-size:.78rem;font-weight:300;color:var(--muted)}
       <button class="modal-x" onclick="closeModal()">&times;</button>
     </div>
     <div class="modal-mid">
+
+      <div class="reborn-section-box">
+        <div class="reborn-section-head">
+          <div class="reborn-dot"></div>
+          <span>Reborn — New</span>
+        </div>
+        <p>The fully recoded client. Cleaner code, stronger bypasses. Requires Java 25.</p>
+        <div class="java-req">
+          ⚠ Java 25 required &mdash; <a href="https://adoptium.net/temurin/releases/?version=25" target="_blank" style="color:inherit;text-decoration:underline;margin-left:4px">Download here</a>
+        </div>
+      </div>
+
+      <div class="dl-section-label reborn-label">Reborn Downloads</div>
+      <div class="ver-grid" style="margin-bottom:16px">
+        <button class="ver-btn reborn-btn" onclick="dlVer('reborn-1.21.11')">
+          <span class="ver-n">1.21.11</span>
+          <span class="ver-m"><span class="ver-t">Fabric &bull; Reborn</span><span class="bdg reborn-b">REBORN</span></span>
+          <span class="ver-sub">PC &mdash; watch install guide</span>
+        </button>
+        <button class="ver-btn reborn-btn" onclick="dlVer('reborn-26.1.2')">
+          <span class="ver-n">26.1.2</span>
+          <span class="ver-m"><span class="ver-t">Fabric &bull; Reborn</span><span class="bdg reborn-b">REBORN</span></span>
+          <span class="ver-sub">Android &mdash; watch install guide</span>
+        </button>
+      </div>
+
+      <div class="install-guide">
+        <div class="install-guide-head">Install Guides</div>
+        <div class="install-steps">
+          <div class="install-step">
+            <span class="step-num rb">1</span>
+            <span>Install <strong style="color:var(--white)">Java 25</strong> before launching Reborn &mdash; <a href="https://adoptium.net/temurin/releases/?version=25" target="_blank" class="rb-link">adoptium.net</a></span>
+          </div>
+          <div class="install-step">
+            <span class="step-num rb">2</span>
+            <span>PC install guide &mdash; <a href="https://youtu.be/ASCyvLdY-Ws?is=JN1sG0uh7X-VcV7m" target="_blank" class="rb-link">watch on YouTube</a></span>
+          </div>
+          <div class="install-step">
+            <span class="step-num rb">3</span>
+            <span>Android install guide &mdash; <a href="https://www.youtube.com/watch?v=dSM5Uug_BUs" target="_blank" class="rb-link">watch on YouTube</a></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dl-divider"></div>
+
       <div class="m-warn">
-        <div class="m-warn-head">⚡ Reborn in Development</div>
-        <p>Cyemer is being fully recoded and rebuilt right now. These are the current stable downloads -- fully functional. Follow Discord for the Reborn launch.</p>
+        <div class="m-warn-head">⚡ Legacy Builds</div>
+        <p>These are the original stable builds -- still functional. Reborn is the recommended version. Follow Discord for updates.</p>
       </div>
       <div class="m-ai">
         <p>&#9888;&#65039; Some code is AI generated as the main dev is very busy. This website, for instance, is AI!</p>
       </div>
+
+      <div class="dl-section-label">Legacy Downloads</div>
       <div class="ver-grid">
         <button class="ver-btn eol" onclick="dlVer('1.21.1')">
           <span class="ver-n">1.21.1</span>
@@ -633,12 +744,11 @@ footer p{font-size:.78rem;font-weight:300;color:var(--muted)}
         </button>
       </div>
     </div>
-    <div class="modal-foot"><p>EOL versions no longer receive updates or support</p></div>
+    <div class="modal-foot"><p>EOL versions no longer receive updates or support &mdash; Reborn is the future</p></div>
   </div>
 </div>
 
 <script>
-/* terminal typewriter */
 const lines=['line1','line2','line3','line4','line5','line6','line7'];
 lines.forEach((id,i)=>{
   setTimeout(()=>{
@@ -647,7 +757,6 @@ lines.forEach((id,i)=>{
   },700+i*420);
 });
 
-/* 3d mouse tilt */
 const card=document.getElementById('termCard');
 if(card){
   const scene=card.closest('.terminal-scene');
@@ -662,7 +771,6 @@ if(card){
   });
 }
 
-/* modules */
 const mods=[
   {icon:"⚔️",name:"Fakelag",desc:"Dynamically lag to dodge enemy attacks. No paid client has made this as powerful as ours (yet).",tag:"UNIQUE FREE"},
   {icon:"😵",name:"AutoMace",desc:"Automatically hit insane mace shots. Comes with StunSlam -- most paid clients don't have this yet.",tag:"UNIQUE FREE"},
@@ -683,7 +791,6 @@ mods.forEach((m,i)=>{
   g.appendChild(d);
 });
 
-/* reviews */
 const reviews=[
   {u:"Vikas_999",t:"Just tried StunSlam and it's incredible -- honestly better than most paid clients' versions. Super consistent, doesn't flag, looks totally legit. Only downside is version support but once that gets sorted this client's basically flawless. Huge W."},
   {u:"Sir Jonathen the 19th",t:"Solid month of use, never been banned, flagged, or suspected. Over 2000 wins on a server, under 200 losses since I started. Went from 100W|200L to 2000W|350L. Against free clients easy 10/10."},
@@ -701,7 +808,6 @@ reviews.forEach((r,i)=>{
   rg.appendChild(d);
 });
 
-/* scroll reveal */
 const observer=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){e.target.classList.add('visible')}
@@ -709,17 +815,23 @@ const observer=new IntersectionObserver(entries=>{
 },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal,.mod-card,.rev-card,.pc').forEach(el=>observer.observe(el));
 
-/* nav */
 window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>20)});
 
-/* modal */
 function openModal(){document.getElementById('modal').classList.add('open')}
 function closeModal(){document.getElementById('modal').classList.remove('open')}
 document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))closeModal()});
 document.querySelectorAll('.download-trigger').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();openModal()}));
 
-const urls={'1.21.1':'downloads/Cyemer-1.21.1.jar','1.21.2':'downloads/Cyemer-1.21.2.jar','1.21.3':'downloads/Cyemer-1.21.3.jar','1.21.4':'downloads/Cyemer-1.21.4.jar','1.21.11':'downloads/Cyemer-1.21.11.jar'};
-function dlVer(v){const a=document.createElement('a');a.href=urls[v];a.download=`cyemer-${v}.jar`;document.body.appendChild(a);a.click();document.body.removeChild(a);closeModal()}
+const urls={
+  'reborn-1.21.11':'downloads/1.21.11.jar',
+  'reborn-26.1.2':'downloads/26.1.2.jar',
+  '1.21.1':'downloads/Cyemer-1.21.1.jar',
+  '1.21.2':'downloads/Cyemer-1.21.2.jar',
+  '1.21.3':'downloads/Cyemer-1.21.3.jar',
+  '1.21.4':'downloads/Cyemer-1.21.4.jar',
+  '1.21.11':'downloads/Cyemer-1.21.11.jar'
+};
+function dlVer(v){const a=document.createElement('a');a.href=urls[v];a.download=urls[v].split('/').pop();document.body.appendChild(a);a.click();document.body.removeChild(a);closeModal()}
 </script>
 </body>
 </html>
